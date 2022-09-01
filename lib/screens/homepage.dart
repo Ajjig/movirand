@@ -24,7 +24,7 @@ class _HomePage extends State<HomePage> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: bgColor,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: bgColor,
