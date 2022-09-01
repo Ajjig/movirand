@@ -12,12 +12,15 @@ class CardsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        MovieCard(data: data[index]),
-        MovieCard(data: data[index + 10]),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          MovieCard(data: data[index]),
+          MovieCard(data: data[index + 10]),
+        ],
+      ),
     );
   }
 }
