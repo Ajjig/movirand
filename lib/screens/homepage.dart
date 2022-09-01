@@ -24,14 +24,16 @@ class _HomePage extends State<HomePage> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: bgColor,
         appBar: AppBar(
+          toolbarHeight: 50,
           elevation: 0,
-          backgroundColor: bgColor,
+          backgroundColor: Color(0xF5011627),
           title: const Center(
             child: Text(
               'Home',
               style: TextStyle(
+                shadows: [Shadow(blurRadius: 20)],
                 color: Colors.white,
               ),
             ),

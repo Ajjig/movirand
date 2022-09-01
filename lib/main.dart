@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Movirand',
         theme: ThemeData(
-          primaryColor: bgColor,
+          backgroundColor: bgColor,
+          primaryColor: mainColor,
         ),
         home: const HomePage(),
       );
