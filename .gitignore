@@ -1,7 +1,9 @@
 .metadata
 .dart_tool/
 .packages
-lib/private.dart ## this file contains private api key
+## this file contains private api key
+lib/private.dart
+
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
