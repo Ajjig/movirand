@@ -9,25 +9,24 @@ class MovieCard extends StatelessWidget {
   const MovieCard({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
         Image.network(
           'https://image.tmdb.org/t/p/w300' + data['poster_path'],
-          width: (MediaQuery.of(context).size.width - 10 - 10 * 4) / 2,
+          width: posterWidth,
         ),
         Container(
-          width: (MediaQuery.of(context).size.width - 10 - 10 * 4) / 2,
-          height: (MediaQuery.of(context).size.height - 10 - 10 * 4) /
-              2 *
-              .6555,
+          width: posterWidth,
+          height: posterWidth,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.center,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.black12,
-                Colors.black38,
+                Colors.transparent,
+                Colors.black54,
                 Colors.black87,
                 Colors.black,
               ],
@@ -35,9 +34,8 @@ class MovieCard extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: (MediaQuery.of(context).size.height - 10 - 10 * 4) /
-              2 *
-              .6555,
+          height:
+              (MediaQuery.of(context).size.height - 10 - 10 * 4) / 2 * .6555,
           width: (MediaQuery.of(context).size.width - 10 - 10 * 4) / 2,
           child: Column(
             children: [
@@ -62,8 +60,7 @@ class MovieCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RatingBarIndicator(
-                      rating:
-                          double.parse(data['vote_average'].toString()) / 2,
+                      rating: double.parse(data['vote_average'].toString()) / 2,
                       itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: Colors.amber,
@@ -86,7 +83,6 @@ class MovieCard extends StatelessWidget {
     );
   }
 }
-
 
 class Movies extends StatelessWidget {
   const Movies({Key? key}) : super(key: key);
