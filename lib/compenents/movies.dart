@@ -3,6 +3,7 @@ import 'package:movirand/compenents/loading.dart';
 import '../api/api.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../colors.dart';
+import 'cards_container.dart';
 
 class MovieCard extends StatelessWidget {
   final dynamic data;
@@ -96,13 +97,7 @@ class Movies extends StatelessWidget {
         } else if (snapshot.hasData) {
           return ListView.builder(
             itemCount: 10,
-            itemBuilder: (BuildContext context, int index) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MovieCard(data: snapshot.data['results'][index]),
-                MovieCard(data: snapshot.data['results'][index + 10]),
-              ],
-            ),
+            itemBuilder: (BuildContext context, int index) => CardsContainer(data: snapshot.data['results'], index: index),
           );
         } else {
           return const Loading();
@@ -111,3 +106,4 @@ class Movies extends StatelessWidget {
     ));
   }
 }
+
