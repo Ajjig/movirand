@@ -26,12 +26,14 @@ class _HomePage extends State<HomePage> {
         extendBody: true,
         backgroundColor: bgColor,
         appBar: AppBar(
+          toolbarHeight: 50,
           elevation: 0,
-          backgroundColor: bgColor,
+          backgroundColor: Color(0xF5011627),
           title: const Center(
             child: Text(
               'Home',
               style: TextStyle(
+                shadows: [Shadow(blurRadius: 20)],
                 color: Colors.white,
               ),
             ),
