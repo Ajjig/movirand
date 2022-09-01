@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../compenents/movies.dart';
 import 'package:flutter/material.dart';
+import '../colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _HomePage extends State<HomePage> {
         backgroundColor: Colors.grey.shade300,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color(0xF0011627),
+          backgroundColor: bgColor,
           title: const Center(
             child: Text(
               'Home',
@@ -45,7 +46,7 @@ class _HomePage extends State<HomePage> {
             Icon(Icons.more_horiz_outlined, color: Colors.white)
           ],
           backgroundColor: Colors.transparent,
-          color: const Color(0xFFFF2745),
+          color: mainColor,
           animationDuration: const Duration(milliseconds: 300),
           onTap: (index) => {
             setState(() {
