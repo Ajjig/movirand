@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movirand/compenents/loading.dart';
 import '../api/api.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../colors.dart';
@@ -8,12 +9,6 @@ class MovieCard extends StatelessWidget {
   const MovieCard({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (data == null) {
-      return Container(
-          color: bgColor,
-          child:
-              Center(child: CircularProgressIndicator(color: mainColor)));
-    }
     return Center(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -97,6 +92,7 @@ class MovieCard extends StatelessWidget {
   }
 }
 
+
 class Movies extends StatelessWidget {
   const Movies({Key? key}) : super(key: key);
   @override
@@ -123,7 +119,7 @@ class Movies extends StatelessWidget {
             ),
           );
         } else {
-          return const MovieCard(data: null);
+          return const Loading();
         }
       },
     ));
