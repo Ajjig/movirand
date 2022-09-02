@@ -3,7 +3,11 @@
 .packages
 ## this file contains private api key
 lib/private.dart
-
+*.bin
+*.lock
+*.temp
+.packages
+android/.gradle
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
