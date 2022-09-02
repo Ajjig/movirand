@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/homepage.dart';
 import 'colors.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,7 +9,12 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: bgColor,
+      ),
+      child: MaterialApp(
+
         debugShowCheckedModeBanner: false,
         title: 'Movirand',
         theme: ThemeData(
@@ -16,6 +22,7 @@ class MyApp extends StatelessWidget {
           primaryColor: mainColor,
         ),
         home: const HomePage(),
-      );
-    }
+      ),
+    );
+  }
 }
