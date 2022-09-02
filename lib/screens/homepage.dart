@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../compenents/movies.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
