@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'movies.dart';
+import 'movie_card.dart';
 
 class CardsContainer extends StatelessWidget {
   final dynamic data;
