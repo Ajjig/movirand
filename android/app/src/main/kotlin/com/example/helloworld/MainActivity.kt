@@ -1,4 +1,4 @@
-package com.example.helloworld
+package com.ajjig.movirand
 
 import io.flutter.embedding.android.FlutterActivity
 
