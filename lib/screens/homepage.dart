@@ -40,6 +40,11 @@ class _HomePage extends State<HomePage> {
           ),
         ),
         body: _homeItems[_index],
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: bgColor,
+          onPressed: () {},
+          child: Icon(Icons.shuffle_sharp, color: mainColor),
+        ),
         bottomNavigationBar: CurvedNavigationBar(
           animationCurve: Curves.easeOutCirc,
           items: [
