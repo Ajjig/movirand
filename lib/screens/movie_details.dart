@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movirand/colors.dart';
+import 'package:movirand/compenents/loading.dart';
 
 class MovieDetails extends StatelessWidget {
   final dynamic data;
@@ -19,11 +20,11 @@ class MovieDetails extends StatelessWidget {
       body: Hero(
         tag: data['id'].toString(),
         child: Center(
-          child: Image.network(
+          child: (data['poster_path'] != null) ? Image.network(
             'https://image.tmdb.org/t/p/w500' + data['poster_path'],
             width: MediaQuery.of(context).size.width - 10,
             fit: BoxFit.fill,
-          ),
+          ) : ImageLoading(),
         ),
       ),
     );
