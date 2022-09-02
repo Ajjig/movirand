@@ -43,10 +43,10 @@ class _HomePage extends State<HomePage> {
         bottomNavigationBar: CurvedNavigationBar(
           animationCurve: Curves.easeOutCirc,
           items: [
-            Icon(Icons.home, color: bgColor),
-            Icon(Icons.favorite, color: bgColor),
-            Icon(Icons.search, color: bgColor),
-            Icon(Icons.more_horiz_outlined, color: bgColor)
+            Icon(Icons.home, color: bgColor, size: 25),
+            Icon(Icons.favorite, color: bgColor, size: 25),
+            Icon(Icons.search, color: bgColor, size: 25),
+            Icon(Icons.more_horiz_outlined, color: bgColor, size: 25),
           ],
           backgroundColor: Colors.transparent,
           color: mainColor,
