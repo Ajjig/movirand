@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../compenents/movies.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import '../compenents/navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _HomePage extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    PageController _pageController =  PageController(initialPage: 0, keepPage: true);
     return (SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -39,29 +41,21 @@ class _HomePage extends State<HomePage> {
             ),
           ),
         ),
-        body: _homeItems[_index],
+        body: PageView(
+          children: _homeItems,
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _index = index;
+            });
+          },
+        ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: bgColor,
           onPressed: () {},
           child: Icon(Icons.shuffle_sharp, color: mainColor),
         ),
-        bottomNavigationBar: CurvedNavigationBar(
-          animationCurve: Curves.easeOutCirc,
-          items: [
-            Icon(Icons.home, color: bgColor, size: 25),
-            Icon(Icons.favorite, color: bgColor, size: 25),
-            Icon(Icons.search, color: bgColor, size: 25),
-            Icon(Icons.more_horiz_outlined, color: bgColor, size: 25),
-          ],
-          backgroundColor: Colors.transparent,
-          color: mainColor,
-          animationDuration: const Duration(milliseconds: 300),
-          onTap: (index) => {
-            setState(() {
-              _index = index;
-            })
-          },
-        ),
+        bottomNavigationBar: NavBar(index: _index, pageController: _pageController),
       ),
     ));
   }
