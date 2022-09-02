@@ -42,11 +42,11 @@ class _HomePage extends State<HomePage> {
         body: _homeItems[_index],
         bottomNavigationBar: CurvedNavigationBar(
           animationCurve: Curves.easeOutCirc,
-          items: const [
-            Icon(Icons.home, color: Colors.white),
-            Icon(Icons.favorite, color: Colors.white),
-            Icon(Icons.search, color: Colors.white),
-            Icon(Icons.more_horiz_outlined, color: Colors.white)
+          items: [
+            Icon(Icons.home, color: bgColor),
+            Icon(Icons.favorite, color: bgColor),
+            Icon(Icons.search, color: bgColor),
+            Icon(Icons.more_horiz_outlined, color: bgColor)
           ],
           backgroundColor: Colors.transparent,
           color: mainColor,
