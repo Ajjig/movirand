@@ -18,13 +18,11 @@ class Loading extends StatelessWidget {
 class ImageLoading extends StatelessWidget {
   const ImageLoading({
     Key? key,
-    required this.posterWidth,
   }) : super(key: key);
-
-  final double posterWidth;
 
   @override
   Widget build(BuildContext context) {
+    double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
     return SizedBox(
       width: posterWidth,
       height: posterWidth * 1.5,
