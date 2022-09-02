@@ -2,6 +2,7 @@ import '../compenents/movies.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../compenents/navigation_bar.dart';
+import 'keep_alive.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 class _HomePage extends State<HomePage> {
   int _index = 0;
   final List<Widget> _homeItems = [
-    const Movies(),
+    const KeepAlivePage(child: Movies()),
     Container(color: Colors.green.shade200),
     Container(color: Colors.blue.shade200),
     Container(color: Colors.yellow.shade200),
