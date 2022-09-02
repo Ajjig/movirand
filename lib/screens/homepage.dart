@@ -28,7 +28,7 @@ class _HomePage extends State<HomePage> {
         appBar: AppBar(
           toolbarHeight: 50,
           elevation: 0,
-          backgroundColor: Color(0xF5011627),
+          backgroundColor: const Color(0xF5011627),
           title: const Center(
             child: Text(
               'Home',
@@ -41,6 +41,7 @@ class _HomePage extends State<HomePage> {
         ),
         body: _homeItems[_index],
         bottomNavigationBar: CurvedNavigationBar(
+          animationCurve: Curves.easeOutCirc,
           items: const [
             Icon(Icons.home, color: Colors.white),
             Icon(Icons.favorite, color: Colors.white),
