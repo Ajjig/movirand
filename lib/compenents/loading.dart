@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);
@@ -10,5 +11,31 @@ class Loading extends StatelessWidget {
         color: bgColor,
         child:
             Center(child: CircularProgressIndicator(color: mainColor)));
+  }
+}
+
+
+class ImageLoading extends StatelessWidget {
+  const ImageLoading({
+    Key? key,
+    required this.posterWidth,
+  }) : super(key: key);
+
+  final double posterWidth;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: posterWidth,
+      height: posterWidth * 1.5,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(posterWidth / 2 - 30, posterWidth / 2 + 10, posterWidth / 2 - 30, posterWidth / 2 + 50),
+        child: const LoadingIndicator(
+          indicatorType: Indicator.lineScaleParty,
+          colors: [Colors.white, Color(0xFFFF2745), Colors.greenAccent],
+          backgroundColor: Colors.transparent,
+        ),
+      ),
+    );
   }
 }
