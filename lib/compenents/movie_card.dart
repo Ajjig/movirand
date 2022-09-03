@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../colors.dart';
 import '../screens/movie_details.dart';
-
+import 'loading.dart';
 
 class MovieCard extends StatelessWidget {
   final dynamic data;
@@ -26,10 +26,15 @@ class MovieCard extends StatelessWidget {
         children: [
           Hero(
             tag: data['id'].toString(),
-            child: Image.network(
+            child: (data['poster_path'] != null) ? Image.network(
               'https://image.tmdb.org/t/p/w500' + data['poster_path'],
               width: posterWidth,
-            ),
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const ImageLoading();
+              },
+            ) : const ImageLoading(),
           ),
           Container(
             width: posterWidth,
@@ -51,7 +56,7 @@ class MovieCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Text(data['title'],
+                  child: Text(data['title'].toString(),
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontSize: 12,
@@ -69,7 +74,8 @@ class MovieCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       RatingBarIndicator(
-                        rating: double.parse(data['vote_average'].toString()) / 2,
+                        rating:
+                            double.parse(data['vote_average'].toString()) / 2,
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,
