@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:movirand/compenents/loading.dart';
-import '../api/api.dart';
 import 'cards_container.dart';
+import '../screens/homepage.dart';
 
-
-class Movies extends StatelessWidget {
+class Movies extends StatefulWidget {
   const Movies({Key? key}) : super(key: key);
+
+  @override
+  State<Movies> createState() => _MoviesState();
+}
+
+class _MoviesState extends State<Movies> {
+
+
   @override
   Widget build(BuildContext context) {
     return (FutureBuilder<dynamic>(
-      future: api.discover(),
+      future: data,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Center(
@@ -21,7 +28,8 @@ class Movies extends StatelessWidget {
         } else if (snapshot.hasData) {
           return ListView.builder(
             itemCount: 10,
-            itemBuilder: (BuildContext context, int index) => CardsContainer(data: snapshot.data['results'], index: index),
+            itemBuilder: (BuildContext context, int index) =>
+                CardsContainer(data: snapshot.data['results'], index: index),
           );
         } else {
           return const Loading();
@@ -30,4 +38,3 @@ class Movies extends StatelessWidget {
     ));
   }
 }
-
