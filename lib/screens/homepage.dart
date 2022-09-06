@@ -2,7 +2,7 @@ import '../compenents/movies.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../compenents/navigation_bar.dart';
-import 'keep_alive.dart';
+import '../api/api.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,18 +10,21 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePage();
 }
 
+late Future<dynamic> data = api.discover();
+
 class _HomePage extends State<HomePage> {
   int _index = 0;
   final List<Widget> _homeItems = [
-    const KeepAlivePage(child: Movies()),
+    const Movies(),
     Container(color: Colors.green.shade200),
     Container(color: Colors.blue.shade200),
     Container(color: Colors.yellow.shade200),
   ];
 
+  final PageController _pageController =
+        PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
-    PageController _pageController =  PageController(initialPage: 0, keepPage: true);
     return (SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
