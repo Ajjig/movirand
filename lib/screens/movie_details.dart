@@ -23,7 +23,7 @@ class MovieDetails extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
+        child: SizedBox(
           height: 400,
           child: Stack(
             children: [
@@ -35,7 +35,7 @@ class MovieDetails extends StatelessWidget {
                 backgroundColor: Colors.transparent,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Hero(
                     tag: data['id'].toString(),
@@ -52,12 +52,19 @@ class MovieDetails extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Flexible(
-                    child: Text(data['overview'].toString(),
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        )),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        color: const Color(0XAA000000),
+                        child: Text(data['overview'].toString(),
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )),
+                      ),
+                    ),
                   ),
                 ],
               ),
