@@ -23,6 +23,7 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   flutter_rating_bar: ^4.0.1
   loading_indicator: ^3.1.0
+  bloc: ^8.1.0
 
 dev_dependencies:
   flutter_test:
