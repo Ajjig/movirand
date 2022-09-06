@@ -55,7 +55,7 @@ class MovieDetails extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         color: const Color(0XAA000000),
                         child: Text(data['overview'].toString(),
                             style: const TextStyle(
