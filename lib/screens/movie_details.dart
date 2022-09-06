@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:movirand/colors.dart';
 import 'package:movirand/compenents/loading.dart';
+import '../colors.dart';
+import '../api/api.dart';
 
 class MovieDetails extends StatelessWidget {
   final dynamic data;
@@ -33,6 +35,7 @@ class MovieDetails extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              padding: const EdgeInsets.only(bottom: 10),
               height: 300,
               child: Stack(
                 children: [
@@ -64,7 +67,8 @@ class MovieDetails extends StatelessWidget {
                                 ? Image.network(
                                     'https://image.tmdb.org/t/p/w500' +
                                         data['poster_path'],
-                                    width: MediaQuery.of(context).size.width / 3,
+                                    width:
+                                        MediaQuery.of(context).size.width / 3,
                                   )
                                 : const ImageLoading(),
                           ),
@@ -91,19 +95,40 @@ class MovieDetails extends StatelessWidget {
                 ],
               ),
             ),
+            Divider(
+              height: 20,
+              color: mainColor,
+              thickness: 3,
+              indent: 25,
+              endIndent: 25,
+            ),
             SizedBox(
-              height: 70,
-              child: ListView.builder(
-                itemExtent: 50,
-                scrollDirection: Axis.horizontal,
-                itemCount: 30,
-                itemBuilder: (BuildContext context, int index) {
-                  return const CircleAvatar(
-                    backgroundColor: Colors.blueAccent,
-                    //foregroundImage: im,
-                  );
-                },
-              ),
+              height: 110,
+              child: FutureBuilder<dynamic>(
+                  future: api.getActors(data),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          itemCount: snapshot.data['cast'].length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                child: CircleAvatar(
+                                  radius: 40,
+                                  backgroundColor: mainColor,
+                                  backgroundImage: NetworkImage(
+                                      ( snapshot.data['cast'][index]['profile_path'] != null) ? ('https://image.tmdb.org/t/p/w200' + snapshot.data['cast'][index]['profile_path'].toString()): 'null',
+                                    ),
+                                ),
+                              ),
+                            );
+                          });
+                    } else {
+                      return const Loading();
+                    }
+                  }),
             )
           ],
         ),
