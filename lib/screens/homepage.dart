@@ -45,9 +45,13 @@ class _HomePage extends State<HomePage> {
                 backgroundColor: bgColor,
                 child: const Movies(),
                 onRefresh: () async {
-                  setState(() {
-                    data = api.discover();
-                  });
+                  data = api.discover();
+                  _pageController.jumpToPage(1);
+                  _pageController.animateTo(
+                    0,
+                    duration: const Duration(microseconds: 1),
+                    curve: Curves.easeIn,
+                  );
                 }),
             Container(color: Colors.green.shade200),
             Container(color: Colors.blue.shade200),
@@ -63,15 +67,13 @@ class _HomePage extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: bgColor,
           onPressed: () {
-            setState(() {
-              data = api.discover();
-              _pageController.jumpToPage(1);
-              _pageController.animateTo(
-                0,
-                duration: const Duration(microseconds: 1),
-                curve: Curves.easeIn,
-              );
-            });
+            data = api.discover();
+            _pageController.jumpToPage(1);
+            _pageController.animateTo(
+              0,
+              duration: const Duration(microseconds: 1),
+              curve: Curves.easeIn,
+            );
           },
           child: Icon(Icons.shuffle_sharp, color: mainColor),
         ),
