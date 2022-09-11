@@ -5,9 +5,17 @@ import 'package:movirand/compenents/loading.dart';
 import '../colors.dart';
 import '../api/api.dart';
 
-class MovieDetails extends StatelessWidget {
+class MovieDetails extends StatefulWidget {
   final dynamic data;
-  const MovieDetails({Key? key, required this.data}) : super(key: key);
+
+  MovieDetails({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<MovieDetails> createState() => _MovieDetailsState();
+}
+
+class _MovieDetailsState extends State<MovieDetails> {
+  bool isLiked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +25,15 @@ class MovieDetails extends StatelessWidget {
         actions: [
           IconButton(
               icon: Icon(
-                Icons.favorite,
+                (isLiked) ? Icons.favorite : Icons.favorite_border,
                 size: 30,
                 color: mainColor,
               ),
-              onPressed: () {}),
+              onPressed: () {
+                setState(() {
+                  isLiked = !isLiked;
+                });
+              }),
           IconButton(
               icon: Icon(Icons.ios_share_rounded, size: 30, color: mainColor),
               onPressed: () {}),
@@ -39,10 +51,10 @@ class MovieDetails extends StatelessWidget {
               height: 300,
               child: Stack(
                 children: [
-                  (data['backdrop_path'] != null)
+                  (widget.data['backdrop_path'] != null)
                       ? Image.network(
                           'https://image.tmdb.org/t/p/w500' +
-                              data['backdrop_path'],
+                              widget.data['backdrop_path'],
                           fit: BoxFit.fill)
                       : const LoadingIndicator(
                           indicatorType: Indicator.lineScaleParty,
@@ -61,12 +73,12 @@ class MovieDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Hero(
-                          tag: data['id'].toString(),
+                          tag: widget.data['id'].toString(),
                           child: Center(
-                            child: (data['poster_path'] != null)
+                            child: (widget.data['poster_path'] != null)
                                 ? Image.network(
                                     'https://image.tmdb.org/t/p/w500' +
-                                        data['poster_path'],
+                                        widget.data['poster_path'],
                                     width:
                                         MediaQuery.of(context).size.width / 3,
                                   )
@@ -80,7 +92,7 @@ class MovieDetails extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.all(5),
                               color: const Color(0XAA000000),
-                              child: Text(data['overview'].toString(),
+                              child: Text(widget.data['overview'].toString(),
                                   style: const TextStyle(
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w500,
@@ -105,7 +117,7 @@ class MovieDetails extends StatelessWidget {
             SizedBox(
               height: 110,
               child: FutureBuilder<dynamic>(
-                  future: api.getActors(data),
+                  future: api.getActors(widget.data),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
