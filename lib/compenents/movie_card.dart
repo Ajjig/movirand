@@ -4,9 +4,15 @@ import '../colors.dart';
 import '../screens/movie_details.dart';
 import 'loading.dart';
 
-class MovieCard extends StatelessWidget {
+class MovieCard extends StatefulWidget {
   final dynamic data;
   const MovieCard({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<MovieCard> createState() => _MovieCardState();
+}
+
+class _MovieCardState extends State<MovieCard> {
   @override
   Widget build(BuildContext context) {
     final double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
@@ -16,7 +22,7 @@ class MovieCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => MovieDetails(
-              data: data,
+              data: widget.data,
             ),
           ),
         ),
@@ -25,9 +31,9 @@ class MovieCard extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           Hero(
-            tag: data['id'].toString(),
-            child: (data['poster_path'] != null) ? Image.network(
-              'https://image.tmdb.org/t/p/w500' + data['poster_path'],
+            tag: widget.data['id'].toString(),
+            child: (widget.data['poster_path'] != null) ? Image.network(
+              'https://image.tmdb.org/t/p/w500' + widget.data['poster_path'],
               width: posterWidth,
               loadingBuilder: (BuildContext context, Widget child,
                   ImageChunkEvent? loadingProgress) {
@@ -56,7 +62,7 @@ class MovieCard extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Text(data['title'].toString(),
+                  child: Text(widget.data['title'].toString(),
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontSize: 12,
@@ -75,7 +81,7 @@ class MovieCard extends StatelessWidget {
                     children: [
                       RatingBarIndicator(
                         rating:
-                            double.parse(data['vote_average'].toString()) / 2,
+                            double.parse(widget.data['vote_average'].toString()) / 2,
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,
@@ -83,7 +89,7 @@ class MovieCard extends StatelessWidget {
                         itemCount: 5,
                         itemSize: 13,
                       ),
-                      Text(data['vote_average'].toString() + '/10',
+                      Text(widget.data['vote_average'].toString() + '/10',
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

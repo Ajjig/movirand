@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'movie_card.dart';
 
-class CardsContainer extends StatelessWidget {
+class CardsContainer extends StatefulWidget {
   final dynamic data;
   final int index;
   const CardsContainer({
@@ -11,14 +11,19 @@ class CardsContainer extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CardsContainer> createState() => _CardsContainerState();
+}
+
+class _CardsContainerState extends State<CardsContainer> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MovieCard(data: data[index]),
-          MovieCard(data: data[index + 10]),
+          MovieCard(data: widget.data[widget.index]),
+          MovieCard(data: widget.data[widget.index + 10]),
         ],
       ),
     );
