@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'movie_card.dart';
+import '../models/movie_model.dart';
 
 class CardsContainer extends StatefulWidget {
-  final dynamic data;
+  final List<MovieModel>? data;
   final int index;
   const CardsContainer({
     Key? key,
@@ -22,8 +23,8 @@ class _CardsContainerState extends State<CardsContainer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MovieCard(data: widget.data[widget.index]),
-          MovieCard(data: widget.data[widget.index + 10]),
+          MovieCard(data: widget.data![widget.index]),
+          MovieCard(data: widget.data![widget.index + 10]),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movirand/compenents/loading.dart';
+import 'package:movirand/models/movie_model.dart';
 import 'cards_container.dart';
 import '../screens/homepage.dart';
 
@@ -15,7 +16,7 @@ class _MoviesState extends State<Movies> {
 
   @override
   Widget build(BuildContext context) {
-    return (FutureBuilder<dynamic>(
+    return (FutureBuilder<List<MovieModel>>(
       future: data,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -29,7 +30,7 @@ class _MoviesState extends State<Movies> {
           return ListView.builder(
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) =>
-                CardsContainer(data: snapshot.data['results'], index: index),
+                CardsContainer(data: snapshot.data, index: index),
           );
         } else {
           return const Loading();

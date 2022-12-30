@@ -1,6 +1,5 @@
-//tmdb api model
 class MovieModel {
-  final int id;
+  final String id;
   final String title;
   final String posterPath;
   final String backdropPath;
@@ -10,26 +9,26 @@ class MovieModel {
   final int voteCount;
 
   MovieModel({
-    this.id,
-    this.title,
-    this.posterPath,
-    this.backdropPath,
-    this.overview,
-    this.releaseDate,
-    this.voteAverage,
-    this.voteCount,
+    required this.id,
+    required this.title,
+    required this.posterPath,
+    required this.backdropPath,
+    required this.overview,
+    required this.releaseDate,
+    required this.voteAverage,
+    required this.voteCount,
   });
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) {
+  factory MovieModel.fromJson(dynamic json) {
     return MovieModel(
-      id: json['id'],
-      title: json['title'],
-      posterPath: json['poster_path'],
-      backdropPath: json['backdrop_path'],
-      overview: json['overview'],
-      releaseDate: json['release_date'],
+      id: json['id'].toString(),
+      title: json['title'].toString(),
+      posterPath: json['poster_path'].toString(),
+      backdropPath: json['backdrop_path'].toString(),
+      overview: json['overview'].toString(),
+      releaseDate: json['release_date'].toString(),
       voteAverage: json['vote_average'].toDouble(),
-      voteCount: json['vote_count'],
+      voteCount: json['vote_count'].toInt(),
     );
   }
 }

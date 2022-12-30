@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movirand/models/movie_model.dart';
 import '../colors.dart';
 import '../screens/movie_details.dart';
 import 'loading.dart';
 
 class MovieCard extends StatefulWidget {
-  final dynamic data;
+  final MovieModel data;
   const MovieCard({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -31,9 +32,9 @@ class _MovieCardState extends State<MovieCard> {
         alignment: Alignment.bottomCenter,
         children: [
           Hero(
-            tag: widget.data['id'].toString(),
-            child: (widget.data['poster_path'] != null) ? Image.network(
-              'https://image.tmdb.org/t/p/w500' + widget.data['poster_path'],
+            tag: widget.data.id,
+            child: (widget.data.posterPath != null) ? Image.network(
+              'https://image.tmdb.org/t/p/w500' + widget.data.posterPath,
               width: posterWidth,
               loadingBuilder: (BuildContext context, Widget child,
                   ImageChunkEvent? loadingProgress) {
@@ -62,7 +63,7 @@ class _MovieCardState extends State<MovieCard> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Text(widget.data['title'].toString(),
+                  child: Text(widget.data.title,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontSize: 12,
@@ -81,7 +82,7 @@ class _MovieCardState extends State<MovieCard> {
                     children: [
                       RatingBarIndicator(
                         rating:
-                            double.parse(widget.data['vote_average'].toString()) / 2,
+                            widget.data.voteAverage / 2,
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,
@@ -89,7 +90,7 @@ class _MovieCardState extends State<MovieCard> {
                         itemCount: 5,
                         itemSize: 13,
                       ),
-                      Text(widget.data['vote_average'].toString() + '/10',
+                      Text(widget.data.voteAverage.toString() + '/10',
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,

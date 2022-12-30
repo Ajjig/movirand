@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../colors.dart';
 import '../compenents/navigation_bar.dart';
 import '../api/api.dart';
+import '../models/movie_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePage();
 }
 
-late Future<dynamic> data = api.discover();
+Future<List<MovieModel>> data = api.discover();
 
 class _HomePage extends State<HomePage> {
   int _index = 0;
@@ -49,7 +50,7 @@ class _HomePage extends State<HomePage> {
                   _pageController.jumpToPage(1);
                   _pageController.animateTo(
                     0,
-                    duration: const Duration(microseconds: 1),
+                    duration: const Duration(microseconds: 0),
                     curve: Curves.easeIn,
                   );
                 }),

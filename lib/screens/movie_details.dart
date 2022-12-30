@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:movirand/colors.dart';
 import 'package:movirand/compenents/loading.dart';
-import '../colors.dart';
 import '../api/api.dart';
+import '../models/movie_model.dart';
 
 class MovieDetails extends StatelessWidget {
-  final dynamic data;
+  final MovieModel data;
   const MovieDetails({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -39,10 +39,10 @@ class MovieDetails extends StatelessWidget {
               height: 300,
               child: Stack(
                 children: [
-                  (data['backdrop_path'] != null)
+                  (data.backdropPath != null)
                       ? Image.network(
                           'https://image.tmdb.org/t/p/w500' +
-                              data['backdrop_path'],
+                              data.backdropPath.toString(),
                           fit: BoxFit.fill)
                       : const LoadingIndicator(
                           indicatorType: Indicator.lineScaleParty,
@@ -61,12 +61,12 @@ class MovieDetails extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Hero(
-                          tag: data['id'].toString(),
+                          tag: data.id,
                           child: Center(
-                            child: (data['poster_path'] != null)
+                            child: (data.posterPath != null)
                                 ? Image.network(
                                     'https://image.tmdb.org/t/p/w500' +
-                                        data['poster_path'],
+                                        data.posterPath,
                                     width:
                                         MediaQuery.of(context).size.width / 3,
                                   )
@@ -80,7 +80,7 @@ class MovieDetails extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.all(5),
                               color: const Color(0XAA000000),
-                              child: Text(data['overview'].toString(),
+                              child: Text(data.overview,
                                   style: const TextStyle(
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w500,
@@ -109,7 +109,7 @@ class MovieDetails extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
-                          itemCount: snapshot.data['cast'].length,
+                          itemCount: snapshot.data.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
@@ -119,7 +119,7 @@ class MovieDetails extends StatelessWidget {
                                   radius: 40,
                                   backgroundColor: mainColor,
                                   backgroundImage: NetworkImage(
-                                      ( snapshot.data['cast'][index]['profile_path'] != null) ? ('https://image.tmdb.org/t/p/w200' + snapshot.data['cast'][index]['profile_path'].toString()): 'null',
+                                      'https://image.tmdb.org/t/p/w200' + snapshot.data[index]['profile_path'],
                                     ),
                                 ),
                               ),
