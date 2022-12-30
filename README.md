@@ -9,11 +9,14 @@ This project is a starting point for a Flutter application.
 A few resources to get you started if this is your first Flutter project:
 
 - https://flutter.dev/docs/get-started/codelab
-- https://flutter.dev/docs/cookbook
 
 For help getting started with Flutter, view our
 https://flutter.dev/docs, which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Preview
+![screenshots](https://user-images.githubusercontent.com/74059327/209452239-549e9066-830e-4ba1-af16-09497d3aa163.png)
+
 
 
 ## pub.dartlang.org hosted packages
@@ -44,6 +47,7 @@ samples, guidance on mobile development, and a full API reference.
  - [typed_data 1.3.1](https://pub.dartlang.org/packages/typed_data/versions/1.3.1)
  - [vector_math 2.1.2](https://pub.dartlang.org/packages/vector_math/versions/2.1.2)
  - [loading_indicator 3.1.0 ](https://pub.dev/packages/loading_indicator)
+ - [provider 6.0.3](https://pub.dev/packages/provider)
 
 ## Other packages
 
