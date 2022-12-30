@@ -39,7 +39,7 @@ class MovieDetails extends StatelessWidget {
               height: 300,
               child: Stack(
                 children: [
-                  (data.backdropPath != null)
+                  (data.backdropPath != 'null')
                       ? Image.network(
                           'https://image.tmdb.org/t/p/w500' +
                               data.backdropPath.toString(),
@@ -63,7 +63,7 @@ class MovieDetails extends StatelessWidget {
                         Hero(
                           tag: data.id,
                           child: Center(
-                            child: (data.posterPath != null)
+                            child: (data.posterPath != 'null')
                                 ? Image.network(
                                     'https://image.tmdb.org/t/p/w500' +
                                         data.posterPath,
@@ -115,11 +115,16 @@ class MovieDetails extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
+                                onTap: () {
+                                   // TODO: Navigate to actor details
+                                },
                                 child: CircleAvatar(
                                   radius: 40,
                                   backgroundColor: mainColor,
                                   backgroundImage: NetworkImage(
-                                      'https://image.tmdb.org/t/p/w200' + snapshot.data[index]['profile_path'],
+                                      (snapshot.data[index]['profile_path'] != null) ?
+                                      'https://image.tmdb.org/t/p/w200' + snapshot.data[index]['profile_path'] :
+                                      'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
                                     ),
                                 ),
                               ),

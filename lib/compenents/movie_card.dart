@@ -33,7 +33,7 @@ class _MovieCardState extends State<MovieCard> {
         children: [
           Hero(
             tag: widget.data.id,
-            child: (widget.data.posterPath != null) ? Image.network(
+            child: (widget.data.posterPath != 'null') ? Image.network(
               'https://image.tmdb.org/t/p/w500' + widget.data.posterPath,
               width: posterWidth,
               loadingBuilder: (BuildContext context, Widget child,
