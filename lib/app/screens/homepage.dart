@@ -1,8 +1,8 @@
-import '../compenents/movies.dart';
+import '../widgets/movies.dart';
 import 'package:flutter/material.dart';
-import '../colors.dart';
-import '../compenents/navigation_bar.dart';
-import '../api/api.dart';
+import '../theme/colors.dart';
+import '../widgets/navigation_bar.dart';
+import '../provider/api.dart';
 import '../models/movie_model.dart';
 
 class HomePage extends StatefulWidget {

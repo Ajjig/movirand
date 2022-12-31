@@ -1,6 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import '../colors.dart';
+import '../theme/colors.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({

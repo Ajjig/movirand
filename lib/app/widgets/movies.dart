@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movirand/compenents/loading.dart';
-import 'package:movirand/models/movie_model.dart';
+import '../widgets/loading.dart';
+import '../models/movie_model.dart';
 import 'cards_container.dart';
 import '../screens/homepage.dart';
 

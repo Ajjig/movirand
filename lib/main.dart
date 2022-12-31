@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/homepage.dart';
-import 'colors.dart';
+import 'package:movirand/app/screens/homepage.dart';
+import 'package:movirand/app/theme/colors.dart';
 import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:movirand/colors.dart';
-import 'package:movirand/compenents/loading.dart';
-import '../api/api.dart';
+import '../theme/colors.dart';
+import '..//widgets/loading.dart';
+import '../provider/api.dart';
 import '../models/movie_model.dart';
+import '../data/CONSTANTS.dart';
 
 class MovieDetails extends StatelessWidget {
   final MovieModel data;
@@ -41,7 +42,7 @@ class MovieDetails extends StatelessWidget {
                 children: [
                   (data.backdropPath != 'null')
                       ? Image.network(
-                          'https://image.tmdb.org/t/p/w500' +
+                          IMAGE_BASE_URL +
                               data.backdropPath.toString(),
                           fit: BoxFit.fill)
                       : const LoadingIndicator(
@@ -65,7 +66,7 @@ class MovieDetails extends StatelessWidget {
                           child: Center(
                             child: (data.posterPath != 'null')
                                 ? Image.network(
-                                    'https://image.tmdb.org/t/p/w500' +
+                                    IMAGE_BASE_URL +
                                         data.posterPath,
                                     width:
                                         MediaQuery.of(context).size.width / 3,
@@ -102,6 +103,31 @@ class MovieDetails extends StatelessWidget {
               indent: 25,
               endIndent: 25,
             ),
+            // Container(
+            //   height: 20,
+            //   color: bgColor,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: List.generate(
+            //       data.genres.length,
+            //       (index) => Text(
+            //         data.genres[index],
+            //         style: const TextStyle(
+            //           fontSize: 12,
+            //           fontWeight: FontWeight.w500,
+            //           color: Colors.grey,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Divider(
+            //   height: 20,
+            //   color: mainColor,
+            //   thickness: 3,
+            //   indent: 25,
+            //   endIndent: 25,
+            // ),
             SizedBox(
               height: 110,
               child: FutureBuilder<dynamic>(
