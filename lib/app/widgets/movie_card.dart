@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movirand/app/views/movie_details_page.dart';
 import '../models/movie_model.dart';
 import '../theme/colors.dart';
-import '../views/movie_details_page.dart';
 import 'loading.dart';
+import 'package:get/get.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel data;
@@ -14,13 +15,11 @@ class MovieCard extends StatelessWidget {
     final double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
     return InkWell(
       onTap: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => MovieDetails(
-              data: data,
-            ),
-          ),
+        Get.to(
+          () => MovieDetails(data: data),
+          transition: Transition.downToUp,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutCirc,
         ),
       },
       child: Stack(
