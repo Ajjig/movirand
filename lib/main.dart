@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movirand/app/views/home_page.dart';
 import 'package:movirand/app/theme/colors.dart';
 import 'package:flutter/services.dart';
+import 'app/data/CONSTANTS.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Movirand',
+        title: APP_TITLE,
         theme: ThemeData(
           backgroundColor: bgColor,
           primaryColor: mainColor,
