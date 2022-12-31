@@ -5,15 +5,10 @@ import '../theme/colors.dart';
 import '../views/movie_details_page.dart';
 import 'loading.dart';
 
-class MovieCard extends StatefulWidget {
+class MovieCard extends StatelessWidget {
   final MovieModel data;
   const MovieCard({Key? key, required this.data}) : super(key: key);
 
-  @override
-  State<MovieCard> createState() => _MovieCardState();
-}
-
-class _MovieCardState extends State<MovieCard> {
   @override
   Widget build(BuildContext context) {
     final double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
@@ -23,7 +18,7 @@ class _MovieCardState extends State<MovieCard> {
           context,
           MaterialPageRoute(
             builder: (context) => MovieDetails(
-              data: widget.data,
+              data: data,
             ),
           ),
         ),
@@ -32,10 +27,10 @@ class _MovieCardState extends State<MovieCard> {
         alignment: Alignment.bottomCenter,
         children: [
           Hero(
-            tag: widget.data.id,
-            child: (widget.data.posterPath != 'null')
+            tag: data.id,
+            child: (data.posterPath != 'null')
                 ? Image.network(
-                    'https://image.tmdb.org/t/p/w500' + widget.data.posterPath,
+                    'https://image.tmdb.org/t/p/w500' + data.posterPath,
                     width: posterWidth,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
@@ -65,7 +60,7 @@ class _MovieCardState extends State<MovieCard> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Text(widget.data.title,
+                  child: Text(data.title,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                           fontSize: 12,
@@ -83,7 +78,7 @@ class _MovieCardState extends State<MovieCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       RatingBarIndicator(
-                        rating: widget.data.voteAverage / 2,
+                        rating: data.voteAverage / 2,
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,
@@ -91,7 +86,7 @@ class _MovieCardState extends State<MovieCard> {
                         itemCount: 5,
                         itemSize: 13,
                       ),
-                      Text(widget.data.voteAverage.toString() + '/10',
+                      Text(data.voteAverage.toString() + '/10',
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
