@@ -5,6 +5,7 @@ import '..//widgets/loading.dart';
 import '../provider/api.dart';
 import '../models/movie_model.dart';
 import '../data/CONSTANTS.dart';
+import 'package:get/get.dart';
 
 class MovieDetails extends StatelessWidget {
   final MovieModel data;
@@ -99,35 +100,32 @@ class MovieDetails extends StatelessWidget {
             Divider(
               height: 20,
               color: mainColor,
-              thickness: 3,
+              thickness: 1,
               indent: 25,
               endIndent: 25,
             ),
-            // Container(
-            //   height: 20,
-            //   color: bgColor,
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //     children: List.generate(
-            //       data.genres.length,
-            //       (index) => Text(
-            //         data.genres[index],
-            //         style: const TextStyle(
-            //           fontSize: 12,
-            //           fontWeight: FontWeight.w500,
-            //           color: Colors.grey,
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            // Divider(
-            //   height: 20,
-            //   color: mainColor,
-            //   thickness: 3,
-            //   indent: 25,
-            //   endIndent: 25,
-            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(
+                data.genres.length,
+                (index) => InkWell(
+                  onTap: () {
+                    // TODO: Navigate to genre details
+                  },
+                  child: Chip(
+                    label: Text(data.genres[index]),
+                    backgroundColor: Colors.teal[500],
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: 20,
+              color: mainColor,
+              thickness: 1,
+              indent: 25,
+              endIndent: 25,
+            ),
             SizedBox(
               height: 110,
               child: FutureBuilder<dynamic>(
@@ -141,18 +139,21 @@ class MovieDetails extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
+                                enableFeedback: false,
                                 onTap: () {
-                                   // TODO: Navigate to actor details
+                                  Get.snackbar(
+                                    snapshot.data[index]!['name'] ?? '_______',
+                                    snapshot.data[index]!['character'] ?? '_______ in ' + data.title,
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: Colors.black,
+                                    colorText: Colors.white,
+                                    margin: const EdgeInsets.all(10),
+                                    borderRadius: 10,
+                                    duration: const Duration(seconds: 2),
+                                    icon: actorCircleAvatar(snapshot.data[index]['profile_path']),
+                                  );
                                 },
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: mainColor,
-                                  backgroundImage: NetworkImage(
-                                      (snapshot.data[index]['profile_path'] != null) ?
-                                      'https://image.tmdb.org/t/p/w200' + snapshot.data[index]['profile_path'] :
-                                      'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                                    ),
-                                ),
+                                child: actorCircleAvatar(snapshot.data[index]!['profile_path']!, radius: 35)
                               ),
                             );
                           });
@@ -163,6 +164,17 @@ class MovieDetails extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+CircleAvatar actorCircleAvatar(String? profilePath, {double radius = 20}) {
+  return CircleAvatar(
+      radius: radius,
+      backgroundImage: NetworkImage(
+        (profilePath != null) ?
+        'https://image.tmdb.org/t/p/w200' + profilePath :
+         DEFAUL_PROFILE_IMAGE,
       ),
     );
   }
