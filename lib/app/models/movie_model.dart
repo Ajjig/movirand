@@ -1,4 +1,5 @@
 import 'dart:convert';
+import '../data/CONSTANTS.dart';
 
 class MovieModel {
   final String id;
@@ -9,7 +10,7 @@ class MovieModel {
   final String releaseDate;
   final double voteAverage;
   final int voteCount;
-  // final List<String> genres;
+  final List<String> genres;
 
   MovieModel({
     required this.id,
@@ -20,14 +21,16 @@ class MovieModel {
     required this.releaseDate,
     required this.voteAverage,
     required this.voteCount,
-    // required this.genres,
+    required this.genres,
   });
 
   factory MovieModel.fromJson(dynamic json) {
-    // List<String> genres = [];
-    // for (var i = 0; i < json['genres'].length; i++) {
-    //   genres.add(json['genres'][i]['name']);
-    // }
+    List<String> genres = [];
+    for (var i = 0; i < json['genre_ids'].length; i++) {
+      if (MOVIE_GENRES.containsKey(json['genre_ids'][i]!)) {
+        genres.add(MOVIE_GENRES[json['genre_ids'][i]]!);
+      }
+    }
     return MovieModel(
       id: json['id'].toString(),
       title: json['title'].toString(),
@@ -37,7 +40,7 @@ class MovieModel {
       releaseDate: json['release_date'].toString(),
       voteAverage: json['vote_average'].toDouble(),
       voteCount: json['vote_count'].toInt(),
-      // genres: genres,
+      genres: genres,
     );
   }
 }
