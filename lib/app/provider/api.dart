@@ -1,4 +1,4 @@
-import '../private.dart';
+import '../../private.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
