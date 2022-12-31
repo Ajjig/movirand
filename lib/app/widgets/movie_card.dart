@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../models/movie_model.dart';
 import '../theme/colors.dart';
-import '../screens/movie_details.dart';
+import '../views/movie_details_page.dart';
 import 'loading.dart';
 
 class MovieCard extends StatefulWidget {
@@ -33,15 +33,17 @@ class _MovieCardState extends State<MovieCard> {
         children: [
           Hero(
             tag: widget.data.id,
-            child: (widget.data.posterPath != 'null') ? Image.network(
-              'https://image.tmdb.org/t/p/w500' + widget.data.posterPath,
-              width: posterWidth,
-              loadingBuilder: (BuildContext context, Widget child,
-                  ImageChunkEvent? loadingProgress) {
-                if (loadingProgress == null) return child;
-                return const ImageLoading();
-              },
-            ) : const ImageLoading(),
+            child: (widget.data.posterPath != 'null')
+                ? Image.network(
+                    'https://image.tmdb.org/t/p/w500' + widget.data.posterPath,
+                    width: posterWidth,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const ImageLoading();
+                    },
+                  )
+                : const ImageLoading(),
           ),
           Container(
             width: posterWidth,
@@ -81,8 +83,7 @@ class _MovieCardState extends State<MovieCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       RatingBarIndicator(
-                        rating:
-                            widget.data.voteAverage / 2,
+                        rating: widget.data.voteAverage / 2,
                         itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,

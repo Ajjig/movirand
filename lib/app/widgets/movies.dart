@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/loading.dart';
 import '../models/movie_model.dart';
 import 'cards_container.dart';
-import '../screens/homepage.dart';
+import '../views/home_page.dart';
 
 class Movies extends StatefulWidget {
   const Movies({Key? key}) : super(key: key);
@@ -12,8 +12,6 @@ class Movies extends StatefulWidget {
 }
 
 class _MoviesState extends State<Movies> {
-
-
   @override
   Widget build(BuildContext context) {
     return (FutureBuilder<List<MovieModel>>(

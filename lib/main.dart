@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movirand/app/screens/homepage.dart';
+import 'package:movirand/app/views/home_page.dart';
 import 'package:movirand/app/theme/colors.dart';
 import 'package:flutter/services.dart';
 
@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
         statusBarColor: bgColor,
       ),
       child: MaterialApp(
-
         debugShowCheckedModeBanner: false,
         title: 'Movirand',
         theme: ThemeData(
