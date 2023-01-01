@@ -43,7 +43,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     isFavorite = false;
                   });
                 } else {
-                  box.write(widget.data.id.toString(), widget.data);
+                  box.write(widget.data.id.toString(), widget.data.toJson());
                   setState(() {
                     isFavorite = true;
                   });
