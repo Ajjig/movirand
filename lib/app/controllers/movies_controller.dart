@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:movirand/app/provider/api.dart';
 import '../models/movie_model.dart';
@@ -8,8 +7,8 @@ class MoviesController extends GetxController {
 
   @override
   void onInit() async {
-    data.value = await api.discover();
     super.onInit();
+    refresh();
   }
 
   @override

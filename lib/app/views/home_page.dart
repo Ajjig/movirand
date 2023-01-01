@@ -3,6 +3,7 @@ import '../widgets/movies.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import '../widgets/navigation_bar.dart';
+import 'package:get/get.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   int _index = 0;
-  MoviesController _moviesController = MoviesController();
+  final MoviesController _moviesController = Get.put( MoviesController() );
   final PageController _pageController =
       PageController(initialPage: 0, keepPage: false);
 
