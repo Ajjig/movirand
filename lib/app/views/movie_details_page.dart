@@ -146,7 +146,7 @@ class MovieDetails extends StatelessWidget {
                                     snapshot.data![index].name,
                                     snapshot.data![index].character,
                                     snackPosition: SnackPosition.BOTTOM,
-                                    backgroundColor: Colors.black,
+                                    backgroundColor: Colors.teal[500],
                                     colorText: Colors.white,
                                     margin: const EdgeInsets.all(10),
                                     borderRadius: 10,
