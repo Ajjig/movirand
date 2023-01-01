@@ -1,9 +1,9 @@
+import 'package:movirand/app/controllers/movies_controller.dart';
 import '../widgets/movies.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
 import '../widgets/navigation_bar.dart';
-import '../provider/api.dart';
-import '../models/movie_model.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,13 +11,13 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePage();
 }
 
-Future<List<MovieModel>> data = api.discover();
 
 class _HomePage extends State<HomePage> {
   int _index = 0;
-
+  MoviesController _moviesController = MoviesController();
   final PageController _pageController =
       PageController(initialPage: 0, keepPage: false);
+
   @override
   Widget build(BuildContext context) {
     return (SafeArea(
@@ -44,15 +44,11 @@ class _HomePage extends State<HomePage> {
             RefreshIndicator(
                 color: mainColor,
                 backgroundColor: bgColor,
-                child: const Movies(),
+                child: Movies(
+                  controller: _moviesController,
+                ),
                 onRefresh: () async {
-                  data = api.discover();
-                  _pageController.jumpToPage(1);
-                  _pageController.animateTo(
-                    0,
-                    duration: const Duration(microseconds: 0),
-                    curve: Curves.easeIn,
-                  );
+                  _moviesController.refresh();
                 }),
             Container(color: Colors.green.shade200),
             Container(color: Colors.blue.shade200),
@@ -68,13 +64,7 @@ class _HomePage extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: bgColor,
           onPressed: () {
-            data = api.discover();
-            _pageController.jumpToPage(1);
-            _pageController.animateTo(
-              0,
-              duration: const Duration(microseconds: 1),
-              curve: Curves.easeIn,
-            );
+            _moviesController.refresh();
           },
           child: Icon(Icons.shuffle_sharp, color: mainColor),
         ),
