@@ -6,9 +6,13 @@ import 'package:flutter/services.dart';
 import 'app/data/CONSTANTS.dart';
 import 'package:get/get.dart';
 import 'app/views/movie_details_page.dart';
+import 'package:get_storage/get_storage.dart';
 
+void main() async {
 
-void main() => runApp(const MyApp());
+  await GetStorage.init('favorites');
+  return runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
