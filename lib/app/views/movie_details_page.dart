@@ -144,14 +144,16 @@ class MovieDetails extends StatelessWidget {
                                 onTap: () {
                                   Get.snackbar(
                                     snapshot.data![index].name,
-                                    snapshot.data![index].character + ' in ' + data.title,
+                                    snapshot.data![index].character,
                                     snackPosition: SnackPosition.BOTTOM,
                                     backgroundColor: Colors.black,
                                     colorText: Colors.white,
                                     margin: const EdgeInsets.all(10),
                                     borderRadius: 10,
-                                    duration: const Duration(seconds: 2),
+                                    duration: const Duration(seconds: 1),
                                     icon: actorCircleAvatar(snapshot.data![index].profilePath),
+                                    overlayBlur: 2,
+                                    overlayColor: mainColor.withOpacity(0.01),
                                   );
                                 },
                                 child: actorCircleAvatar(snapshot.data![index].profilePath, radius: 35)
