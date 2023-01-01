@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:movirand/app/controllers/favorites_controller.dart';
 import 'movie_card.dart';
 import '../models/movie_model.dart';
 
-class CardsContainer extends StatefulWidget {
+class CardsContainer extends StatelessWidget {
   final List<MovieModel>? data;
+  final FavsController controller;
   final int index;
   const CardsContainer({
     Key? key,
     required this.data,
     required this.index,
+    required this.controller,
   }) : super(key: key);
 
-  @override
-  State<CardsContainer> createState() => _CardsContainerState();
-}
-
-class _CardsContainerState extends State<CardsContainer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,8 +21,8 @@ class _CardsContainerState extends State<CardsContainer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MovieCard(data: widget.data![widget.index]),
-          MovieCard(data: widget.data![widget.index + 10]),
+          MovieCard(data: data![index], controller: controller),
+          MovieCard(data: data![index + 10], controller: controller),
         ],
       ),
     );

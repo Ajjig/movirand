@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:movirand/app/controllers/favorites_controller.dart';
 import 'package:movirand/app/controllers/movies_controller.dart';
 import '../widgets/loading.dart';
 import 'cards_container.dart';
 import 'package:get/get.dart';
 
 class Movies extends StatelessWidget {
-  final MoviesController _controller;
+  final MoviesController moviesController;
+  final FavsController favsController = Get.put( FavsController() );
 
-  const Movies({Key? key, required MoviesController controller}) : _controller = controller, super(key: key);
+  Movies({Key? key, required this.moviesController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (_controller.data.isEmpty) {
+      if (moviesController.data.isEmpty) {
         return const Loading();
       } else {
         return ListView.builder(
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) =>
-                CardsContainer(data: _controller.data, index: index),
+                CardsContainer(data: moviesController.data, index: index, controller: favsController),
           );
       }
     });
