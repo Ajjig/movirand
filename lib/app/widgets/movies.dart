@@ -5,9 +5,10 @@ import 'cards_container.dart';
 import 'package:get/get.dart';
 
 class Movies extends StatelessWidget {
-  MoviesController _controller;
+  final MoviesController _controller;
 
-  Movies({required MoviesController controller}) : _controller = controller;
+  const Movies({Key? key, required MoviesController controller}) : _controller = controller, super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
