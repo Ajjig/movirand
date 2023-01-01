@@ -1,6 +1,9 @@
 .metadata
 .dart_tool/
 .packages
+.vscode/
+.vscode/*
+.idea/
 ## this file contains private api key
 lib/private.dart
 *.bin
