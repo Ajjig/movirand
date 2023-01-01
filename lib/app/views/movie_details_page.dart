@@ -1,38 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:movirand/colors.dart';
-import 'package:movirand/compenents/loading.dart';
-import '../colors.dart';
-import '../api/api.dart';
+import 'package:movirand/app/models/actors_model.dart';
+import '../theme/colors.dart';
+import '..//widgets/loading.dart';
+import '../provider/api.dart';
+import '../models/movie_model.dart';
+import '../data/CONSTANTS.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class MovieDetails extends StatefulWidget {
-  final dynamic data;
-
-  MovieDetails({Key? key, required this.data}) : super(key: key);
+  final MovieModel data;
+  const MovieDetails({Key? key, required this.data}) : super(key: key);
 
   @override
   State<MovieDetails> createState() => _MovieDetailsState();
 }
 
 class _MovieDetailsState extends State<MovieDetails> {
-  bool isLiked = false;
+  final box = GetStorage('favorites');
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
+    isFavorite = box.read(widget.data.id.toString()) != null ? true : false;
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
         actions: [
           IconButton(
               icon: Icon(
-                (isLiked) ? Icons.favorite : Icons.favorite_border,
+                isFavorite
+                    ? Icons.favorite
+                    : Icons.favorite_border,
                 size: 30,
                 color: mainColor,
               ),
               onPressed: () {
-                setState(() {
-                  isLiked = !isLiked;
-                });
+                if (isFavorite) {
+                  box.remove(widget.data.id.toString());
+                  setState(() {
+                    isFavorite = false;
+                  });
+                } else {
+                  box.write(widget.data.id.toString(), widget.data);
+                  setState(() {
+                    isFavorite = true;
+                  });
+                }
               }),
           IconButton(
               icon: Icon(Icons.ios_share_rounded, size: 30, color: mainColor),
@@ -51,10 +66,9 @@ class _MovieDetailsState extends State<MovieDetails> {
               height: 300,
               child: Stack(
                 children: [
-                  (widget.data['backdrop_path'] != null)
+                  (widget.data.backdropPath != 'null')
                       ? Image.network(
-                          'https://image.tmdb.org/t/p/w500' +
-                              widget.data['backdrop_path'],
+                          IMAGE_BASE_URL + widget.data.backdropPath.toString(),
                           fit: BoxFit.fill)
                       : const LoadingIndicator(
                           indicatorType: Indicator.lineScaleParty,
@@ -73,12 +87,11 @@ class _MovieDetailsState extends State<MovieDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Hero(
-                          tag: widget.data['id'].toString(),
+                          tag: widget.data.id,
                           child: Center(
-                            child: (widget.data['poster_path'] != null)
+                            child: (widget.data.posterPath != 'null')
                                 ? Image.network(
-                                    'https://image.tmdb.org/t/p/w500' +
-                                        widget.data['poster_path'],
+                                    IMAGE_BASE_URL + widget.data.posterPath,
                                     width:
                                         MediaQuery.of(context).size.width / 3,
                                   )
@@ -92,7 +105,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                             child: Container(
                               padding: const EdgeInsets.all(5),
                               color: const Color(0XAA000000),
-                              child: Text(widget.data['overview'].toString(),
+                              child: Text(widget.data.overview,
                                   style: const TextStyle(
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w500,
@@ -110,31 +123,65 @@ class _MovieDetailsState extends State<MovieDetails> {
             Divider(
               height: 20,
               color: mainColor,
-              thickness: 3,
+              thickness: 1,
+              indent: 25,
+              endIndent: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(
+                widget.data.genres.length,
+                (index) => InkWell(
+                  onTap: () {
+                    // TODO: Navigate to genre details
+                  },
+                  child: Chip(
+                    label: Text(widget.data.genres[index]),
+                    backgroundColor: Colors.teal[500],
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: 20,
+              color: mainColor,
+              thickness: 1,
               indent: 25,
               endIndent: 25,
             ),
             SizedBox(
               height: 110,
-              child: FutureBuilder<dynamic>(
+              child: FutureBuilder<List<ActorsModel>>(
                   future: api.getActors(widget.data),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
-                          itemCount: snapshot.data['cast'].length,
+                          itemCount: snapshot.data!.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: mainColor,
-                                  backgroundImage: NetworkImage(
-                                      ( snapshot.data['cast'][index]['profile_path'] != null) ? ('https://image.tmdb.org/t/p/w200' + snapshot.data['cast'][index]['profile_path'].toString()): 'null',
-                                    ),
-                                ),
-                              ),
+                                  enableFeedback: false,
+                                  onTap: () {
+                                    Get.snackbar(
+                                      snapshot.data![index].name,
+                                      snapshot.data![index].character,
+                                      snackPosition: SnackPosition.BOTTOM,
+                                      backgroundColor: Colors.teal[500],
+                                      colorText: Colors.white,
+                                      margin: const EdgeInsets.all(10),
+                                      borderRadius: 10,
+                                      duration: const Duration(seconds: 1),
+                                      icon: actorCircleAvatar(
+                                          snapshot.data![index].profilePath),
+                                      overlayBlur: 2,
+                                      overlayColor: mainColor.withOpacity(0.01),
+                                    );
+                                  },
+                                  child: actorCircleAvatar(
+                                      snapshot.data![index].profilePath,
+                                      radius: 35)),
                             );
                           });
                     } else {
@@ -144,6 +191,15 @@ class _MovieDetailsState extends State<MovieDetails> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  CircleAvatar actorCircleAvatar(String profilePath, {double radius = 20}) {
+    return CircleAvatar(
+      radius: radius,
+      backgroundImage: NetworkImage(
+        profilePath,
       ),
     );
   }

@@ -47,7 +47,7 @@ samples, guidance on mobile development, and a full API reference.
  - [typed_data 1.3.1](https://pub.dartlang.org/packages/typed_data/versions/1.3.1)
  - [vector_math 2.1.2](https://pub.dartlang.org/packages/vector_math/versions/2.1.2)
  - [loading_indicator 3.1.0 ](https://pub.dev/packages/loading_indicator)
- - [provider 6.0.3](https://pub.dev/packages/provider)
+ - [GetX](https://pub.dev/packages/get)
 
 ## Other packages
 
