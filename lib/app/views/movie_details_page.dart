@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:movirand/app/models/actors_model.dart';
 import '../theme/colors.dart';
 import '..//widgets/loading.dart';
 import '../provider/api.dart';
@@ -128,12 +129,12 @@ class MovieDetails extends StatelessWidget {
             ),
             SizedBox(
               height: 110,
-              child: FutureBuilder<dynamic>(
+              child: FutureBuilder<List<ActorsModel>>(
                   future: api.getActors(data),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
-                          itemCount: snapshot.data.length,
+                          itemCount: snapshot.data!.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
@@ -142,18 +143,18 @@ class MovieDetails extends StatelessWidget {
                                 enableFeedback: false,
                                 onTap: () {
                                   Get.snackbar(
-                                    snapshot.data[index]!['name'] ?? '_______',
-                                    snapshot.data[index]!['character'] ?? '_______ in ' + data.title,
+                                    snapshot.data![index].name,
+                                    snapshot.data![index].character + ' in ' + data.title,
                                     snackPosition: SnackPosition.BOTTOM,
                                     backgroundColor: Colors.black,
                                     colorText: Colors.white,
                                     margin: const EdgeInsets.all(10),
                                     borderRadius: 10,
                                     duration: const Duration(seconds: 2),
-                                    icon: actorCircleAvatar(snapshot.data[index]['profile_path']),
+                                    icon: actorCircleAvatar(snapshot.data![index].profilePath),
                                   );
                                 },
-                                child: actorCircleAvatar(snapshot.data[index]!['profile_path']!, radius: 35)
+                                child: actorCircleAvatar(snapshot.data![index].profilePath, radius: 35)
                               ),
                             );
                           });
@@ -168,13 +169,11 @@ class MovieDetails extends StatelessWidget {
     );
   }
 
-CircleAvatar actorCircleAvatar(String? profilePath, {double radius = 20}) {
+CircleAvatar actorCircleAvatar(String profilePath, {double radius = 20}) {
   return CircleAvatar(
       radius: radius,
       backgroundImage: NetworkImage(
-        (profilePath != null) ?
-        'https://image.tmdb.org/t/p/w200' + profilePath :
-         DEFAUL_PROFILE_IMAGE,
+        profilePath,
       ),
     );
   }

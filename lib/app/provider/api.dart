@@ -1,3 +1,5 @@
+import 'package:movirand/app/models/actors_model.dart';
+
 import '../../private.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -24,12 +26,18 @@ class Api {
     return movies;
   }
 
-  Future<dynamic> getActors(MovieModel data) async {
+  Future<List<ActorsModel>> getActors(MovieModel data) async {
+    List<ActorsModel> actors = [];
     print('getActors called');
     http.Response response = await http.get(Uri.https('api.themoviedb.org',
         "/3/movie/" + data.id + '/credits', {'api_key': apiKey}));
 
-    return jsonDecode(response.body)['cast'];
+    dynamic jsonData = jsonDecode(response.body)['cast'];
+    for (var i = 0; i < jsonData.length; i++) {
+      ActorsModel actor = ActorsModel.fromJson(jsonData[i]);
+      actors.add(actor);
+    }
+    return actors;
   }
 }
 
