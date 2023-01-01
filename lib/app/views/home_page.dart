@@ -65,7 +65,17 @@ class _HomePage extends State<HomePage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: bgColor,
           onPressed: () {
+            Get.dialog(
+              const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.teal,
+                ),
+              ),
+            );
             _moviesController.refresh();
+            Future.delayed(const Duration(milliseconds: 500), () {
+              Get.back();
+            });
           },
           child: Icon(Icons.shuffle_sharp, color: mainColor),
         ),
