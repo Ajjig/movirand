@@ -1,3 +1,5 @@
+import 'package:movirand/app/widgets/favorites.dart';
+
 import '../controllers/favorites_controller.dart';
 import 'package:movirand/app/controllers/movies_controller.dart';
 import '../widgets/movies.dart';
@@ -53,7 +55,7 @@ class _HomePage extends State<HomePage> {
                 onRefresh: () async {
                   _moviesController.refresh();
                 }),
-            Container(color: Colors.green.shade200),
+            Favorites(),
             Container(color: Colors.blue.shade200),
             Container(color: Colors.yellow.shade200),
           ],
