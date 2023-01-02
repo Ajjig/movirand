@@ -12,10 +12,11 @@ class Movies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (moviesController.data.isEmpty) {
+      if (moviesController.isEmpty) {
         return const Loading();
       } else {
         return GridView(
+
           scrollDirection: Axis.vertical,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: moviesController.crossSize,

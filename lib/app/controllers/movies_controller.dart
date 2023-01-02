@@ -10,6 +10,7 @@ class MoviesController extends GetxController {
           ? 3
           : 2;
   int get length => data.length;
+  bool get isEmpty => data.isEmpty;
 
   @override
   void onInit() async {
