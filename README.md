@@ -20,7 +20,7 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
-## pub.dartlang.org hosted packages
+## Packages
 
  - [async 2.8.2](https://pub.dartlang.org/packages/async/versions/2.8.2)
  - [boolean_selector 2.1.0](https://pub.dartlang.org/packages/boolean_selector/versions/2.1.0)
