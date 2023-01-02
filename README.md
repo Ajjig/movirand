@@ -1,6 +1,6 @@
 # movirand
 
-A cross-platfrom mobile app that suggest random movies to watch
+A cross-platfrom mobile app that generates random movies to watch
 
 ## Getting Started
 
