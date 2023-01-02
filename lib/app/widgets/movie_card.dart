@@ -9,9 +9,8 @@ import 'package:get/get.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel data;
-  final FavsController controller;
 
-  const MovieCard({Key? key, required this.data, required this.controller})
+  const MovieCard({Key? key, required this.data})
       : super(key: key);
 
   @override
@@ -20,7 +19,7 @@ class MovieCard extends StatelessWidget {
     return InkWell(
       onTap: () => {
         Get.to(
-          () => MovieDetails(data: data, controller: controller),
+          () => MovieDetails(data: data),
           transition: Transition.downToUp,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeOutCirc,

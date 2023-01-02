@@ -9,14 +9,11 @@ import '../models/movie_model.dart';
 import '../data/CONSTANTS.dart';
 import 'package:get/get.dart';
 
-
 class MovieDetails extends StatelessWidget {
   final MovieModel data;
-  final FavsController controller;
+  final FavsController controller = Get.find<FavsController>();
 
-  MovieDetails({Key? key, required this.data, required this.controller})
-      : super(key: key);
-
+  MovieDetails({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +21,21 @@ class MovieDetails extends StatelessWidget {
       backgroundColor: bgColor,
       appBar: AppBar(
         actions: [
-          IconButton(
-              icon: GetX<FavsController>(
-                builder: (controller) {
-                  return Icon(
-                    controller.isFavorite(data)
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    size: 30,
-                    color: mainColor,
-                  );
-                }
-              ),
-              onPressed: () {
-                if (controller.isFavorite(data)) {
-                  controller.remove(data);
-                } else {
-                  controller.add(data);
-                }
-              }),
+          IconButton(icon: GetX<FavsController>(builder: (controller) {
+            return Icon(
+              controller.isFavorite(data)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              size: 30,
+              color: mainColor,
+            );
+          }), onPressed: () {
+            if (controller.isFavorite(data)) {
+              controller.remove(data);
+            } else {
+              controller.add(data);
+            }
+          }),
           IconButton(
               icon: Icon(Icons.ios_share_rounded, size: 30, color: mainColor),
               onPressed: () {}),

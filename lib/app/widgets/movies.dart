@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movirand/app/controllers/favorites_controller.dart';
+
 import 'package:movirand/app/controllers/movies_controller.dart';
 import '../widgets/loading.dart';
 import 'cards_container.dart';
@@ -7,9 +7,8 @@ import 'package:get/get.dart';
 
 class Movies extends StatelessWidget {
   final MoviesController moviesController;
-  final FavsController favsController = Get.put( FavsController() );
 
-  Movies({Key? key, required this.moviesController}) : super(key: key);
+  const Movies({Key? key, required this.moviesController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class Movies extends StatelessWidget {
         return ListView.builder(
             itemCount: 10,
             itemBuilder: (BuildContext context, int index) =>
-                CardsContainer(data: moviesController.data, index: index, controller: favsController),
+                CardsContainer(data: moviesController.data, index: index),
           );
       }
     });
