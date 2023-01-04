@@ -1,6 +1,6 @@
 # movirand
 
-A cross-platfrom mobile app that suggest random movies to watch
+A cross-platfrom mobile app that generates random movies to watch
 
 ## Getting Started
 
@@ -15,11 +15,12 @@ https://flutter.dev/docs, which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
 ## Preview
-![screenshots](https://user-images.githubusercontent.com/74059327/209452239-549e9066-830e-4ba1-af16-09497d3aa163.png)
+![ScreenShots](https://user-images.githubusercontent.com/74059327/210185511-577a982f-9c89-4ed1-9d33-c7013c4715a5.png)
 
 
 
-## pub.dartlang.org hosted packages
+
+## Packages
 
  - [async 2.8.2](https://pub.dartlang.org/packages/async/versions/2.8.2)
  - [boolean_selector 2.1.0](https://pub.dartlang.org/packages/boolean_selector/versions/2.1.0)

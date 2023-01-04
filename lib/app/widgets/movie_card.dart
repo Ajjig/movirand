@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movirand/app/views/movie_details_page.dart';
+import '../controllers/favorites_controller.dart';
 import '../models/movie_model.dart';
 import '../theme/colors.dart';
 import 'loading.dart';
@@ -8,7 +9,9 @@ import 'package:get/get.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel data;
-  const MovieCard({Key? key, required this.data}) : super(key: key);
+
+  const MovieCard({Key? key, required this.data})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

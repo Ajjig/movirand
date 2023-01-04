@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:movirand/app/controllers/favorites_controller.dart';
 import 'package:movirand/app/models/actors_model.dart';
 import '../theme/colors.dart';
 import '..//widgets/loading.dart';
@@ -7,48 +8,34 @@ import '../provider/api.dart';
 import '../models/movie_model.dart';
 import '../data/CONSTANTS.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
-class MovieDetails extends StatefulWidget {
+class MovieDetails extends StatelessWidget {
   final MovieModel data;
-  const MovieDetails({Key? key, required this.data}) : super(key: key);
+  final FavsController controller = Get.find<FavsController>();
 
-  @override
-  State<MovieDetails> createState() => _MovieDetailsState();
-}
-
-class _MovieDetailsState extends State<MovieDetails> {
-  final box = GetStorage('favorites');
-  bool isFavorite = false;
+  MovieDetails({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    isFavorite = box.read(widget.data.id.toString()) != null ? true : false;
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
         actions: [
-          IconButton(
-              icon: Icon(
-                isFavorite
-                    ? Icons.favorite
-                    : Icons.favorite_border,
-                size: 30,
-                color: mainColor,
-              ),
-              onPressed: () {
-                if (isFavorite) {
-                  box.remove(widget.data.id.toString());
-                  setState(() {
-                    isFavorite = false;
-                  });
-                } else {
-                  box.write(widget.data.id.toString(), widget.data);
-                  setState(() {
-                    isFavorite = true;
-                  });
-                }
-              }),
+          IconButton(icon: GetX<FavsController>(builder: (controller) {
+            return Icon(
+              controller.isFavorite(data)
+                  ? Icons.favorite
+                  : Icons.favorite_border,
+              size: 30,
+              color: mainColor,
+            );
+          }), onPressed: () {
+            if (controller.isFavorite(data)) {
+              controller.remove(data);
+            } else {
+              controller.add(data);
+            }
+          }),
           IconButton(
               icon: Icon(Icons.ios_share_rounded, size: 30, color: mainColor),
               onPressed: () {}),
@@ -66,9 +53,9 @@ class _MovieDetailsState extends State<MovieDetails> {
               height: 300,
               child: Stack(
                 children: [
-                  (widget.data.backdropPath != 'null')
+                  (data.backdropPath != 'null')
                       ? Image.network(
-                          IMAGE_BASE_URL + widget.data.backdropPath.toString(),
+                          IMAGE_BASE_URL + data.backdropPath.toString(),
                           fit: BoxFit.fill)
                       : const LoadingIndicator(
                           indicatorType: Indicator.lineScaleParty,
@@ -87,11 +74,11 @@ class _MovieDetailsState extends State<MovieDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Hero(
-                          tag: widget.data.id,
+                          tag: data.id,
                           child: Center(
-                            child: (widget.data.posterPath != 'null')
+                            child: (data.posterPath != 'null')
                                 ? Image.network(
-                                    IMAGE_BASE_URL + widget.data.posterPath,
+                                    IMAGE_BASE_URL + data.posterPath,
                                     width:
                                         MediaQuery.of(context).size.width / 3,
                                   )
@@ -105,7 +92,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                             child: Container(
                               padding: const EdgeInsets.all(5),
                               color: const Color(0XAA000000),
-                              child: Text(widget.data.overview,
+                              child: Text(data.overview,
                                   style: const TextStyle(
                                     fontSize: 12.5,
                                     fontWeight: FontWeight.w500,
@@ -130,13 +117,13 @@ class _MovieDetailsState extends State<MovieDetails> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: List.generate(
-                widget.data.genres.length,
+                data.genres.length,
                 (index) => InkWell(
                   onTap: () {
                     // TODO: Navigate to genre details
                   },
                   child: Chip(
-                    label: Text(widget.data.genres[index]),
+                    label: Text(data.genres[index]),
                     backgroundColor: Colors.teal[500],
                   ),
                 ),
@@ -152,7 +139,7 @@ class _MovieDetailsState extends State<MovieDetails> {
             SizedBox(
               height: 110,
               child: FutureBuilder<List<ActorsModel>>(
-                  future: api.getActors(widget.data),
+                  future: api.getActors(data),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(

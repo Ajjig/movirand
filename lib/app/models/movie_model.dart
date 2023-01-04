@@ -43,4 +43,18 @@ class MovieModel {
       genres: genres,
     );
   }
+
+  String toJson() {
+    return jsonEncode({
+      'id': id,
+      'title': title,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
+      'overview': overview,
+      'release_date': releaseDate,
+      'vote_average': voteAverage,
+      'vote_count': voteCount,
+      'genres': genres,
+    });
+  }
 }

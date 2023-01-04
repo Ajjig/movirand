@@ -1,3 +1,6 @@
+import 'package:movirand/app/widgets/favorites.dart';
+
+import '../controllers/favorites_controller.dart';
 import 'package:movirand/app/controllers/movies_controller.dart';
 import '../widgets/movies.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 
 class _HomePage extends State<HomePage> {
+  final FavsController favsController = Get.put( FavsController() );
   int _index = 0;
   final MoviesController _moviesController = Get.put( MoviesController() );
   final PageController _pageController =
@@ -46,12 +50,12 @@ class _HomePage extends State<HomePage> {
                 color: mainColor,
                 backgroundColor: bgColor,
                 child: Movies(
-                  controller: _moviesController,
+                  moviesController: _moviesController,
                 ),
                 onRefresh: () async {
                   _moviesController.refresh();
                 }),
-            Container(color: Colors.green.shade200),
+            Favorites(),
             Container(color: Colors.blue.shade200),
             Container(color: Colors.yellow.shade200),
           ],
