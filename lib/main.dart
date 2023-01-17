@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movirand/app/models/movie_model.dart';
 import 'package:movirand/app/views/home_page.dart';
 import 'package:movirand/app/theme/colors.dart';
 import 'package:flutter/services.dart';
 import 'app/data/CONSTANTS.dart';
 import 'package:get/get.dart';
-import 'app/views/movie_details_page.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
