@@ -10,7 +10,6 @@ class Api {
   Future<List<MovieModel>> discover() async {
     List<MovieModel> movies = [];
 
-    print('Discover called');
     http.Response response = await http.get(Uri.https(
         'api.themoviedb.org', '/3/discover/movie', {
       'api_key': apiKey,
@@ -28,7 +27,6 @@ class Api {
 
   Future<List<ActorsModel>> getActors(MovieModel data) async {
     List<ActorsModel> actors = [];
-    print('getActors called');
     http.Response response = await http.get(Uri.https('api.themoviedb.org',
         "/3/movie/" + data.id + '/credits', {'api_key': apiKey}));
 
