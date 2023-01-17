@@ -27,8 +27,8 @@ class MovieModel {
   factory MovieModel.fromJson(dynamic json) {
     List<String> genres = [];
     for (var i = 0; i < json['genre_ids'].length; i++) {
-      if (kMovieGenres.containsKey(json['genre_ids'][i]!)) {
-        genres.add(kMovieGenres[json['genre_ids'][i]]!);
+      if (MOVIE_GENRES.containsKey(json['genre_ids'][i]!)) {
+        genres.add(MOVIE_GENRES[json['genre_ids'][i]]!);
       }
     }
     return MovieModel(

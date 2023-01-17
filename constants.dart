@@ -1,10 +1,9 @@
+const String IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const String PROFILE_BASE_URL = 'https://image.tmdb.org/t/p/w200';
+const String DEFAUL_PROFILE_IMAGE = 'https://cdn-icons-png.flaticon.com/512/957/957284.png?w=200';
+const String APP_TITLE = 'Movirand';
 
-const kImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
-const kProfileBaseUrl = 'https://image.tmdb.org/t/p/w200';
-const kDefaultAvatar = 'https://cdn-icons-png.flaticon.com/512/957/957284.png?w=200';
-const kAppTitle = 'Movirand';
-
-const kMovieGenres = {
+const Map MOVIE_GENRES = {
   28: 'Action',
   12: 'Adventure',
   16: 'Animation',

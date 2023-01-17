@@ -55,7 +55,7 @@ class MovieDetails extends StatelessWidget {
                 children: [
                   (data.backdropPath != 'null')
                       ? Image.network(
-                          kImageBaseUrl + data.backdropPath.toString(),
+                          IMAGE_BASE_URL + data.backdropPath.toString(),
                           fit: BoxFit.fill)
                       : const LoadingIndicator(
                           indicatorType: Indicator.lineScaleParty,
@@ -78,7 +78,7 @@ class MovieDetails extends StatelessWidget {
                           child: Center(
                             child: (data.posterPath != 'null')
                                 ? Image.network(
-                                    kImageBaseUrl + data.posterPath,
+                                    IMAGE_BASE_URL + data.posterPath,
                                     width:
                                         MediaQuery.of(context).size.width / 3,
                                   )

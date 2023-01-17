@@ -15,8 +15,8 @@ class ActorsModel {
     return ActorsModel(
       name: json['name'] ?? '_______',
       profilePath: json['profile_path'] == null
-          ? kDefaultAvatar
-          : kProfileBaseUrl + json['profile_path'],
+          ? DEFAUL_PROFILE_IMAGE
+          : PROFILE_BASE_URL + json['profile_path'],
       character: json['character'] ?? '_______',
     );
   }

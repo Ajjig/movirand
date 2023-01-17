@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
+
   await GetStorage.init('favorites');
   return runApp(const MyApp());
 }
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           GetPage(name: '/home', page: () => const HomePage()),
         ],
         debugShowCheckedModeBanner: false,
-        title: kAppTitle,
+        title: APP_TITLE,
         theme: ThemeData(
           backgroundColor: bgColor,
           primaryColor: mainColor,
