@@ -1,5 +1,5 @@
 import 'package:movirand/app/widgets/favorites.dart';
-
+import '../widgets/search.dart';
 import '../controllers/favorites_controller.dart';
 import 'package:movirand/app/controllers/movies_controller.dart';
 import '../widgets/movies.dart';
@@ -56,7 +56,7 @@ class _HomePage extends State<HomePage> {
                   _moviesController.refresh();
                 }),
             Favorites(),
-            Container(color: Colors.blue.shade200),
+            SearchMovies(),
             Container(color: Colors.yellow.shade200),
           ],
           controller: _pageController,

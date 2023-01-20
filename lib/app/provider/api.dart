@@ -1,5 +1,4 @@
 import 'package:movirand/app/models/actors_model.dart';
-
 import '../../private.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -36,6 +35,20 @@ class Api {
       actors.add(actor);
     }
     return actors;
+  }
+
+  Future<List<MovieModel>> search(String query) async {
+    List<MovieModel> foundMovies = [];
+
+    http.Response response = await http.get(Uri.https(
+        'api.themoviedb.org', '/3/search/movie', {'api_key': apiKey, 'query': query}));
+
+    dynamic jsonData = jsonDecode(response.body)['results'];
+    for (var i = 0; i < jsonData.length; i++) {
+      MovieModel movie = MovieModel.fromJson(jsonData[i]);
+      foundMovies.add(movie);
+    }
+    return foundMovies;
   }
 }
 
