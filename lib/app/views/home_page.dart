@@ -1,4 +1,5 @@
 import 'package:movirand/app/widgets/favorites.dart';
+import '../widgets/filter.dart';
 import '../widgets/search.dart';
 import '../controllers/favorites_controller.dart';
 import 'package:movirand/app/controllers/movies_controller.dart';
@@ -57,7 +58,7 @@ class _HomePage extends State<HomePage> {
                 }),
             Favorites(),
             SearchMovies(),
-            Container(color: Colors.yellow.shade200),
+            FilterPage(),
           ],
           controller: _pageController,
           onPageChanged: (index) {
@@ -67,8 +68,9 @@ class _HomePage extends State<HomePage> {
           },
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: bgColor,
+          backgroundColor: Colors.teal,
           onPressed: () {
+            _pageController.animateTo(0, duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
             Get.dialog(
               const Center(
                 child: CircularProgressIndicator(
@@ -76,12 +78,18 @@ class _HomePage extends State<HomePage> {
                 ),
               ),
             );
-            _moviesController.refresh();
+            if (_index == 3) {
+              _moviesController.filter();
+            } else {
+              _moviesController.refresh();
+            }
             Future.delayed(const Duration(milliseconds: 500), () {
               Get.back();
             });
           },
-          child: Icon(Icons.shuffle_sharp, color: mainColor),
+          child: (_index != 3)
+          ? Icon(Icons.shuffle_sharp, color: bgColor)
+          : Icon(Icons.check_circle, color: bgColor)
         ),
         bottomNavigationBar:
             NavBar(index: _index, pageController: _pageController),

@@ -37,9 +37,7 @@ class NavBar extends StatelessWidget {
         DotNavigationBarItem(
           icon: const Icon(Icons.search),
         ),
-        DotNavigationBarItem(
-          icon: const Icon(Icons.more_horiz_outlined),
-        ),
+        DotNavigationBarItem(icon: const Icon(Icons.filter_list_outlined))
       ],
       backgroundColor: Colors.teal,
     );
