@@ -13,37 +13,42 @@ class FilterPage extends GetView<MoviesController> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: [
-            Text('Select prefered genres.', style: TextStyle(color: mainColor)),
-            const SizedBox(height: 20),
-            Obx(
-              () => Wrap(
-                children: List.generate(
-                  allGenres.length,
-                  (index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ChoiceChip(
-                        selectedColor: mainColor,
-                        label: Text(allGenres[index]),
-                        selected: controller.genres.contains(allGenres[index]),
-                        onSelected: (value) {
-                          if (value) {
-                            controller.addGenre(allGenres[index]);
-                          } else {
-                            controller.removeGenre(allGenres[index]);
-                          }
-                          print(controller.genres);
-                        },
-                      ),
-                    );
-                  },
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      backgroundColor: Colors.blueGrey[900],
+      icon: Icon(Icons.filter_alt_rounded, color: mainColor),
+      content: Container(
+        color: Colors.blueGrey[900],
+        child: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              Text('Select prefered genres.', style: TextStyle(color: mainColor)),
+              const SizedBox(height: 20),
+              Obx(
+                () => Wrap(
+                  children: List.generate(
+                    allGenres.length,
+                    (index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ChoiceChip(
+                          selectedColor: mainColor,
+                          label: Text(allGenres[index]),
+                          selected: controller.genres.contains(allGenres[index]),
+                          onSelected: (value) {
+                            if (value) {
+                              controller.addGenre(allGenres[index]);
+                            } else {
+                              controller.removeGenre(allGenres[index]);
+                            }
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
