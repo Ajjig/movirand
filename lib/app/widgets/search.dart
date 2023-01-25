@@ -72,10 +72,9 @@ class SearchMovies extends StatelessWidget {
                                     color: Colors.white,
                                     child: TextButton(
                                       onPressed: () {
-                                        Get.to(
-                                          () => MovieDetails(
-                                            data: controller.data[index],
-                                          ),
+                                        Get.toNamed(
+                                          'details',
+                                          arguments: controller.data[index],
                                         );
                                       },
                                       child: Text(

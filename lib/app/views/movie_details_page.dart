@@ -10,10 +10,10 @@ import '../data/CONSTANTS.dart';
 import 'package:get/get.dart';
 
 class MovieDetails extends StatelessWidget {
-  final MovieModel data;
+  final MovieModel data = Get.arguments;
   final FavsController controller = Get.find<FavsController>();
 
-  MovieDetails({Key? key, required this.data}) : super(key: key);
+  MovieDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -119,10 +119,15 @@ class MovieDetails extends StatelessWidget {
               children: List.generate(
                 data.genres.length,
                 (index) => InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Chip(
-                    label: Text(data.genres[index]),
+                    label: InkWell(
+                      enableFeedback: false,
+                      onTap: () {
+                        Get.toNamed('/genres', arguments: data.genres[index]);
+                      },
+                      child: Text(data.genres[index]),
+                    ),
                     backgroundColor: Colors.teal[500],
                   ),
                 ),

@@ -17,11 +17,9 @@ class MovieCard extends StatelessWidget {
     final double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
     return InkWell(
       onTap: () => {
-        Get.to(
-          () => MovieDetails(data: data),
-          transition: Transition.downToUp,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCirc,
+        Get.toNamed(
+          '/details',
+          arguments: data,
         ),
       },
       child: Stack(
