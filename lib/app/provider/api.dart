@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
 import '../models/movie_model.dart';
+import '../data/constants.dart';
 
 class Api {
   Future<List<MovieModel>> discover() async {
@@ -40,8 +41,28 @@ class Api {
   Future<List<MovieModel>> search(String query) async {
     List<MovieModel> foundMovies = [];
 
-    http.Response response = await http.get(Uri.https(
-        'api.themoviedb.org', '/3/search/movie', {'api_key': apiKey, 'query': query}));
+    http.Response response = await http.get(Uri.https('api.themoviedb.org',
+        '/3/search/movie', {'api_key': apiKey, 'query': query}));
+
+    dynamic jsonData = jsonDecode(response.body)['results'];
+    for (var i = 0; i < jsonData.length; i++) {
+      MovieModel movie = MovieModel.fromJson(jsonData[i]);
+      foundMovies.add(movie);
+    }
+    return foundMovies;
+  }
+
+  Future<List<MovieModel>> getGenre(String genre) async {
+    List<MovieModel> foundMovies = [];
+
+    http.Response response =
+        await http.get(Uri.https('api.themoviedb.org', '/3/discover/movie', {
+      'api_key': apiKey,
+      'with_genres': kMovieGenres.entries
+          .firstWhere((element) => element.value == genre)
+          .key
+          .toString()
+    }));
 
     dynamic jsonData = jsonDecode(response.body)['results'];
     for (var i = 0; i < jsonData.length; i++) {
