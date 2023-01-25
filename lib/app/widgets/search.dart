@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movirand/app/theme/colors.dart';
-import 'package:movirand/app/views/movie_details_page.dart';
-import 'package:movirand/app/widgets/movie_card.dart';
 import '../controllers/search_controller.dart';
 
 class SearchMovies extends StatelessWidget {
@@ -16,7 +14,7 @@ class SearchMovies extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
             child: TextField(
               cursorColor: mainColor,
               style: const TextStyle(
@@ -27,6 +25,14 @@ class SearchMovies extends StatelessWidget {
                 controller.search(value);
               },
               decoration: const InputDecoration(
+                // border
+                fillColor: Colors.teal,
+                prefixIconColor: Colors.teal,
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                filled: true,
                 hintText: 'Search',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
@@ -34,7 +40,7 @@ class SearchMovies extends StatelessWidget {
                   ),
                 ),
                 hintStyle: TextStyle(
-                  color: Colors.white30,
+                  color: Colors.white,
                   shadows: [Shadow(blurRadius: 20)],
                 ),
               ),
