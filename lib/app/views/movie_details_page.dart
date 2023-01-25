@@ -56,7 +56,7 @@ class MovieDetails extends StatelessWidget {
                   (data.backdropPath != 'null')
                       ? Image.network(
                           kImageBaseUrl + data.backdropPath.toString(),
-                          fit: BoxFit.fill)
+                          fit: BoxFit.cover)
                       : const LoadingIndicator(
                           indicatorType: Indicator.lineScaleParty,
                           colors: [
@@ -86,19 +86,19 @@ class MovieDetails extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Flexible(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              padding: const EdgeInsets.all(5),
-                              color: const Color(0XAA000000),
-                              child: Text(data.overview,
-                                  style: const TextStyle(
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  )),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              backgroundBlendMode: BlendMode.darken,
+                              borderRadius: BorderRadius.circular(2),
+                              color: Colors.black54,
                             ),
+                            child: Text(data.overview,
+                                style: const TextStyle(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                )),
                           ),
                         ),
                       ],
@@ -120,7 +120,6 @@ class MovieDetails extends StatelessWidget {
                 data.genres.length,
                 (index) => InkWell(
                   onTap: () {
-                    // TODO: Navigate to genre details
                   },
                   child: Chip(
                     label: Text(data.genres[index]),
