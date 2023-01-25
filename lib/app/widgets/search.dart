@@ -55,16 +55,7 @@ class SearchMovies extends StatelessWidget {
                   : ListView.builder(
                       itemCount: controller.length,
                       itemBuilder: (_, index) {
-                        return controller.length <= 2
-                            ? ListView.builder(
-                                itemCount: controller.length,
-                                itemBuilder: (_, index) {
-                                  return MovieCard(
-                                    data: controller.data[index],
-                                  );
-                                },
-                              )
-                            : Column(
+                        return Column(
                                 children: [
                                   Container(
                                     height: 50,

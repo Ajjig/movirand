@@ -44,10 +44,12 @@ class Api {
     http.Response response = await http.get(Uri.https('api.themoviedb.org',
         '/3/search/movie', {'api_key': apiKey, 'query': query}));
 
-    dynamic jsonData = jsonDecode(response.body)['results'];
-    for (var i = 0; i < jsonData.length; i++) {
-      MovieModel movie = MovieModel.fromJson(jsonData[i]);
-      foundMovies.add(movie);
+    if (response.statusCode < 400) {
+      dynamic jsonData = jsonDecode(response.body)['results'];
+      for (var i = 0; i < jsonData.length; i++) {
+        MovieModel movie = MovieModel.fromJson(jsonData[i]);
+        foundMovies.add(movie);
+      }
     }
     return foundMovies;
   }

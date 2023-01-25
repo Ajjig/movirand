@@ -15,6 +15,6 @@ class SearchController extends GetxController {
   }
 
   void search(String query) async {
-    _data.value = await api.search(query);
+    _data.value = await api.search(query.replaceAll(' ', '+'));
   }
 }
