@@ -32,10 +32,10 @@ class NavBar extends StatelessWidget {
           icon: const Icon(Icons.home),
         ),
         DotNavigationBarItem(
-          icon: const Icon(Icons.search),
+          icon: const Icon(Icons.favorite),
         ),
         DotNavigationBarItem(
-          icon: const Icon(Icons.favorite),
+          icon: const Icon(Icons.search),
         ),
         DotNavigationBarItem(
           icon: const Icon(Icons.more_horiz_outlined),
