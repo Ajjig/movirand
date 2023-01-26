@@ -57,15 +57,19 @@ class MovieDetails extends StatelessWidget {
                       ? Image.network(
                           kImageBaseUrl + data.backdropPath.toString(),
                           fit: BoxFit.cover)
-                      : const LoadingIndicator(
-                          indicatorType: Indicator.lineScaleParty,
-                          colors: [
-                            Colors.white,
-                            Color(0xFFFF2745),
-                            Colors.greenAccent
-                          ],
-                          backgroundColor: Colors.transparent,
-                        ),
+                      : SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        child: const LoadingIndicator(
+                            indicatorType: Indicator.lineScaleParty,
+                            colors: [
+                              Colors.white,
+                              Color(0xFFFF2745),
+                              Colors.greenAccent
+                            ],
+                            backgroundColor: Colors.transparent,
+                          ),
+                      ),
                   Positioned(
                     top: 125,
                     height: 175,
@@ -75,15 +79,15 @@ class MovieDetails extends StatelessWidget {
                       children: [
                         Hero(
                           tag: data.id,
-                          child: Center(
-                            child: (data.posterPath != 'null')
-                                ? Image.network(
-                                    kImageBaseUrl + data.posterPath,
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                  )
-                                : const ImageLoading(),
-                          ),
+                          child: data.posterPath != 'null'
+                              ? Image.network(
+                                  kImageBaseUrl + data.posterPath,
+                                  width:
+                                      MediaQuery.of(context).size.width / 3,
+                                )
+                              : Image.asset('assets/images/default_poster.jpeg', // TODO: Add default poster
+                                  width:
+                                      MediaQuery.of(context).size.width / 3),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
