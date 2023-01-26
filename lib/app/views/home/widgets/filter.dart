@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movirand/app/controllers/movies_controller.dart';
-import '../theme/colors.dart';
-import '../data/constants.dart';
+import '../../../theme/colors.dart';
+import '../../../data/constants.dart';
 
 class FilterPage extends GetView<MoviesController> {
   FilterPage({Key? key}) : super(key: key);

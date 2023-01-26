@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:movirand/app/controllers/favorites_controller.dart';
 import 'package:movirand/app/models/actors_model.dart';
-import '../theme/colors.dart';
-import '..//widgets/loading.dart';
-import '../provider/api.dart';
-import '../models/movie_model.dart';
-import '../data/CONSTANTS.dart';
+import '../../theme/colors.dart';
+import '../../widgets/loading.dart';
+import '../../provider/api.dart';
+import '../../models/movie_model.dart';
+import '../../data/CONSTANTS.dart';
 import 'package:get/get.dart';
 
 class MovieDetails extends StatelessWidget {

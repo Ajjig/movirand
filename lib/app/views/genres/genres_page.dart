@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movirand/app/controllers/genres_controller.dart';
-import '../theme/colors.dart';
-import '../widgets/movie_card.dart';
+import '../../theme/colors.dart';
+import '../../widgets/movie_card.dart';
 
 class GenrePage extends StatelessWidget {
   GenrePage({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movirand/app/theme/colors.dart';
-import '../controllers/favorites_controller.dart';
-import './movie_card.dart';
+import '../../../controllers/favorites_controller.dart';
+import '../../../widgets/movie_card.dart';
 
 class Favorites extends StatelessWidget {
   final FavsController favsController = Get.find<FavsController>();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movirand/app/theme/colors.dart';
-import '../controllers/search_controller.dart';
+import '../../../controllers/search_controller.dart';
 
 class SearchMovies extends StatelessWidget {
   final SearchController controller = Get.put(SearchController());

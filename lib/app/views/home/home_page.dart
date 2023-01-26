@@ -1,12 +1,12 @@
-import 'package:movirand/app/widgets/favorites.dart';
-import '../widgets/filter.dart';
-import '../widgets/search.dart';
-import '../controllers/favorites_controller.dart';
-import 'package:movirand/app/controllers/movies_controller.dart';
-import '../widgets/movies.dart';
+import './widgets/favorites.dart';
+import './widgets/filter.dart';
+import './widgets/search.dart';
+import '../../controllers/favorites_controller.dart';
+import '../../controllers/movies_controller.dart';
+import '../../widgets/movies.dart';
 import 'package:flutter/material.dart';
-import '../theme/colors.dart';
-import '../widgets/navigation_bar.dart';
+import '../../theme/colors.dart';
+import '../../widgets/navigation_bar.dart';
 import 'package:get/get.dart';
 
 
