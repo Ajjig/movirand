@@ -25,7 +25,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## File Structure
 
-- app
+- app/
     - controllers/
         - State management & controllers
     - data/
