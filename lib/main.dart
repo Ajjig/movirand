@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: kAppTitle,
         theme: ThemeData(
+          accentColor: bgColor,
           backgroundColor: bgColor,
           primaryColor: mainColor,
         ),
