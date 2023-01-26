@@ -22,9 +22,8 @@ class MyApp extends StatelessWidget {
         statusBarColor: bgColor,
       ),
       child: GetMaterialApp(
-        initialRoute: '/home',
         getPages: [
-          GetPage(name: '/home', page: () => const HomePage()),
+          GetPage(name: '/', page: () => const HomePage()),
           GetPage(name: '/genres', page: () => GenrePage()),
           GetPage(name: '/details', page: () => MovieDetails())
         ],
