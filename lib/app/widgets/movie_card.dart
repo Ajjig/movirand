@@ -31,6 +31,7 @@ class MovieCard extends StatelessWidget {
                 ? Image.network(
                     'https://image.tmdb.org/t/p/w500' + data.posterPath,
                     width: posterWidth,
+                    fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) return child;
