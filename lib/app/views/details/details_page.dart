@@ -9,9 +9,8 @@ import '../../models/movie_model.dart';
 import '../../data/CONSTANTS.dart';
 import 'package:get/get.dart';
 
-class MovieDetails extends StatelessWidget {
+class MovieDetails extends GetView<FavsController> {
   final MovieModel data = Get.arguments;
-  final FavsController controller = Get.find<FavsController>();
 
   MovieDetails({Key? key}) : super(key: key);
 

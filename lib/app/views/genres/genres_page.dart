@@ -4,9 +4,8 @@ import 'package:movirand/app/controllers/genres_controller.dart';
 import '../../theme/colors.dart';
 import '../../widgets/movie_card.dart';
 
-class GenrePage extends StatelessWidget {
+class GenrePage extends GetView<GenresController> {
   GenrePage({Key? key}) : super(key: key);
-  final controller = Get.put(GenresController());
   final arg = Get.arguments;
 
   @override

@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:movirand/app/theme/colors.dart';
 import '../../../controllers/search_controller.dart';
 
-class SearchMovies extends StatelessWidget {
-  final SearchController controller = Get.put(SearchController());
+class SearchMovies extends GetView<SearchController> {
 
-  SearchMovies({Key? key}) : super(key: key);
+  const SearchMovies({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
