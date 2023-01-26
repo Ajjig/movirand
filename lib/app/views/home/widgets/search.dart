@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movirand/app/theme/colors.dart';
 import '../../../controllers/search_controller.dart';
+import '../../../theme/colors.dart';
 
 class SearchMovies extends GetView<SearchController> {
 
@@ -13,7 +13,7 @@ class SearchMovies extends GetView<SearchController> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+            padding: const EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
             child: TextField(
               cursorColor: mainColor,
               style: const TextStyle(
@@ -48,47 +48,53 @@ class SearchMovies extends GetView<SearchController> {
           Expanded(
             child: Obx(
               () => controller.length == 0
-                  ? const Center(
+                  ? Center(
                       child: Text(
                         'No results',
                         style: TextStyle(
-                          color: Colors.white,
-                          shadows: [Shadow(blurRadius: 20)],
+                          color: mainColor,
+                          shadows: const [ Shadow(blurRadius: 20) ],
                         ),
                       ),
                     )
-                  : ListView.builder(
-                      itemCount: controller.length,
-                      itemBuilder: (_, index) {
-                        return Column(
-                                children: [
-                                  Container(
-                                    height: 50,
-                                    width: Get.width,
-                                    color: Colors.white,
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Get.toNamed(
-                                          'details',
-                                          arguments: controller.data[index],
-                                        );
-                                      },
-                                      child: Text(
-                                        controller.data[index].title,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          shadows: [Shadow(blurRadius: 20)],
+                  : Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(17.5)),
+                      child: ListView.builder(
+                          itemCount: controller.length,
+                          itemBuilder: (_, index) {
+                            return Column(
+                                    children: [
+                                      Container(
+                                        height: 50,
+                                        width: Get.width,
+                                        color: Colors.white,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Get.toNamed(
+                                              'details',
+                                              arguments: controller.data[index],
+                                            );
+                                          },
+                                          child: Text(
+                                            controller.data[index].title,
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              shadows: [Shadow(blurRadius: 20)],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  const Divider(
-                                    height: 0,
-                                    color: Colors.teal,
-                                  ),
-                                ],
-                              );
-                      }),
+                                      const Divider(
+                                        height: 0,
+                                        color: Colors.teal,
+                                      ),
+                                    ],
+                                  );
+                          }),
+                    ),
+                  ),
             ),
           ),
         ],
