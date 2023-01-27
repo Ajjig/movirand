@@ -1,4 +1,4 @@
-import '../data/CONSTANTS.dart';
+import '../data/constants.dart';
 
 class ActorsModel {
   final String name;

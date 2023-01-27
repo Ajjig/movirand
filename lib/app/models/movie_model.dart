@@ -1,5 +1,5 @@
 import 'dart:convert';
-import '../data/CONSTANTS.dart';
+import '../data/constants.dart';
 
 class MovieModel {
   final String id;

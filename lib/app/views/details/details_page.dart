@@ -6,7 +6,7 @@ import '../../theme/colors.dart';
 import '../../widgets/loading.dart';
 import '../../provider/api.dart';
 import '../../models/movie_model.dart';
-import '../../data/CONSTANTS.dart';
+import '../../data/constants.dart';
 import 'package:get/get.dart';
 
 class MovieDetails extends GetView<FavsController> {

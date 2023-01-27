@@ -7,7 +7,7 @@ import './app/views/details/details_page.dart';
 import 'app/controllers/favorites_controller.dart';
 import 'app/controllers/genres_controller.dart';
 import 'app/controllers/movies_controller.dart';
-import 'app/data/CONSTANTS.dart';
+import 'app/data/constants.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'app/views/genres/genres_page.dart';
