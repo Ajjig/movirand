@@ -14,7 +14,7 @@ import 'app/views/genres/genres_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init('favorites');
+  await GetStorage.init();
   return runApp(const MyApp());
 }
 
@@ -22,17 +22,18 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // put is used to initialize the controllers
+    Get.put(MoviesController());
+    Get.put(FavsController());
+    Get.put(GenresController());
+    Get.put(SearchController());
+
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: bgColor,
       ),
       child: GetMaterialApp(
-        initialBinding: BindingsBuilder(() {
-          Get.lazyPut(() => FavsController());
-          Get.lazyPut(() => GenresController());
-          Get.lazyPut(() => SearchController());
-          Get.lazyPut(() => MoviesController());
-        }),
         getPages: [
           GetPage(name: '/', page: () => const HomePage()),
           GetPage(name: '/genres', page: () => GenrePage()),

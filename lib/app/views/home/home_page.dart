@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   int _index = 0;
-  final MoviesController _moviesController = Get.put( MoviesController() );
+  final MoviesController _moviesController = Get.find<MoviesController>();
   final PageController _pageController =
       PageController(initialPage: 0, keepPage: false);
 

@@ -6,7 +6,7 @@ import '../../../widgets/movie_card.dart';
 
 class Favorites extends GetView<FavsController> {
 
-  Favorites({Key? key}) : super(key: key);
+  const Favorites({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

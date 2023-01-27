@@ -26,9 +26,14 @@ class MovieModel {
 
   factory MovieModel.fromJson(dynamic json) {
     List<String> genres = [];
-    for (var i = 0; i < json['genre_ids'].length; i++) {
-      if (kMovieGenres.containsKey(json['genre_ids'][i]!)) {
-        genres.add(kMovieGenres[json['genre_ids'][i]]!);
+
+    if (json['from_storage'] == 'true') {
+      genres = json['genres'].split(' ');
+    } else {
+      for (var i = 0; i < json['genre_ids'].length; i++) {
+        if (kMovieGenres.containsKey(json['genre_ids'][i]!)) {
+          genres.add(kMovieGenres[json['genre_ids'][i]]!);
+        }
       }
     }
     return MovieModel(
@@ -52,9 +57,10 @@ class MovieModel {
       'backdrop_path': backdropPath,
       'overview': overview,
       'release_date': releaseDate,
-      'vote_average': voteAverage,
-      'vote_count': voteCount,
-      'genres': genres,
+      'vote_average': voteAverage.toString(),
+      'vote_count': voteCount.toString(),
+      'genres': genres.join(' '),
+      'from_storage': 'true',
     });
   }
 }

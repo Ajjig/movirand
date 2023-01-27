@@ -20,24 +20,31 @@ class MovieDetails extends GetView<FavsController> {
       backgroundColor: bgColor,
       appBar: AppBar(
         actions: [
-          IconButton(icon: GetX<FavsController>(builder: (controller) {
-            return Icon(
-              controller.isFavorite(data)
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              size: 30,
-              color: mainColor,
-            );
-          }), onPressed: () {
-            if (controller.isFavorite(data)) {
-              controller.remove(data);
-            } else {
-              controller.add(data);
-            }
-          }),
+          IconButton(
+            icon: Obx(
+              () {
+                return Icon(
+                  controller.isFavorite(data)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  size: 30,
+                  color: mainColor,
+                );
+              },
+            ),
+            onPressed: () {
+              if (controller.isFavorite(data)) {
+                controller.remove(data);
+              } else {
+                controller.add(data);
+              }
+            },
+          ),
           IconButton(
               icon: Icon(Icons.ios_share_rounded, size: 30, color: mainColor),
-              onPressed: () {}),
+              onPressed: () {
+                //TODO: Share
+              }),
         ],
         toolbarHeight: 50,
         elevation: 0,
@@ -57,9 +64,9 @@ class MovieDetails extends GetView<FavsController> {
                           kImageBaseUrl + data.backdropPath.toString(),
                           fit: BoxFit.cover)
                       : SizedBox(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width / 1.5,
-                        child: const LoadingIndicator(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width / 1.5,
+                          child: const LoadingIndicator(
                             indicatorType: Indicator.lineScaleParty,
                             colors: [
                               Colors.white,
@@ -68,7 +75,7 @@ class MovieDetails extends GetView<FavsController> {
                             ],
                             backgroundColor: Colors.transparent,
                           ),
-                      ),
+                        ),
                   Positioned(
                     top: 125,
                     height: 175,
@@ -81,12 +88,11 @@ class MovieDetails extends GetView<FavsController> {
                           child: data.posterPath != 'null'
                               ? Image.network(
                                   kImageBaseUrl + data.posterPath,
-                                  width:
-                                      MediaQuery.of(context).size.width / 3,
+                                  width: MediaQuery.of(context).size.width / 3,
                                 )
-                              : Image.asset('assets/images/default_poster.jpeg', // TODO: Add default poster
-                                  width:
-                                      MediaQuery.of(context).size.width / 3),
+                              : Image.asset(
+                                  'assets/images/default_poster.jpeg', // TODO: Add default poster
+                                  width: MediaQuery.of(context).size.width / 3),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
