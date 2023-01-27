@@ -124,24 +124,29 @@ class MovieDetails extends GetView<FavsController> {
               indent: 25,
               endIndent: 25,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(
-                data.genres.length,
-                (index) => InkWell(
-                  onTap: () {},
-                  child: Chip(
-                    label: InkWell(
-                      enableFeedback: false,
-                      onTap: () {
-                        Get.toNamed('/genres', arguments: data.genres[index]);
-                      },
-                      child: Text(data.genres[index]),
-                    ),
-                    backgroundColor: Colors.teal[500],
-                  ),
-                ),
-              ),
+            SizedBox(
+              height: 50,
+              child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: data.genres.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed('/genres', arguments: data.genres[index]);
+                        },
+                        child: Chip(
+                          backgroundColor: mainColor,
+                          label: Text(
+                            data.genres[index] + ' ' + kGenreEmojis[data.genres[index]]!,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             ),
             Divider(
               height: 20,
@@ -195,5 +200,4 @@ class MovieDetails extends GetView<FavsController> {
       ),
     );
   }
-
 }
