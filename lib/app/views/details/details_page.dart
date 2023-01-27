@@ -8,6 +8,7 @@ import '../../provider/api.dart';
 import '../../models/movie_model.dart';
 import '../../data/constants.dart';
 import 'package:get/get.dart';
+import './widgets/circle_avatar.dart';
 
 class MovieDetails extends GetView<FavsController> {
   final MovieModel data = Get.arguments;
@@ -195,12 +196,4 @@ class MovieDetails extends GetView<FavsController> {
     );
   }
 
-  CircleAvatar actorCircleAvatar(String profilePath, {double radius = 20}) {
-    return CircleAvatar(
-      radius: radius,
-      backgroundImage: NetworkImage(
-        profilePath,
-      ),
-    );
-  }
 }
