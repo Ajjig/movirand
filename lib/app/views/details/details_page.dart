@@ -145,8 +145,7 @@ class MovieDetails extends GetView<FavsController> {
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                  enableFeedback: false,
+                              child: GestureDetector(
                                   onTap: () {
                                     Get.snackbar(
                                       snapshot.data![index].name,
