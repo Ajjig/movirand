@@ -1,7 +1,6 @@
 import './widgets/favorites.dart';
 import './widgets/filter.dart';
 import './widgets/search.dart';
-import '../../controllers/favorites_controller.dart';
 import '../../controllers/movies_controller.dart';
 import '../../widgets/movies.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +54,8 @@ class _HomePage extends State<HomePage> {
                 onRefresh: () async {
                   _moviesController.refresh();
                 }),
-            Favorites(),
-            SearchMovies(),
+            const Favorites(),
+            const SearchMovies(),
             FilterPage(),
           ],
           controller: _pageController,
