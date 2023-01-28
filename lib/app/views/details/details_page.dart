@@ -9,6 +9,7 @@ import '../../models/movie_model.dart';
 import '../../data/constants.dart';
 import 'package:get/get.dart';
 import './widgets/circle_avatar.dart';
+import './widgets/genres_chips.dart';
 
 class MovieDetails extends GetView<FavsController> {
   final MovieModel data = Get.arguments;
@@ -124,30 +125,7 @@ class MovieDetails extends GetView<FavsController> {
               indent: 25,
               endIndent: 25,
             ),
-            SizedBox(
-              height: 50,
-              child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: data.genres.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.toNamed('/genres', arguments: data.genres[index]);
-                        },
-                        child: Chip(
-                          backgroundColor: mainColor,
-                          label: Text(
-                            data.genres[index] + ' ' + kGenreEmojis[data.genres[index]]!,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
-            ),
+            GenresChips(data: data),
             Divider(
               height: 20,
               color: mainColor,
