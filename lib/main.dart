@@ -42,8 +42,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: kAppTitle,
         theme: ThemeData(
-          accentColor: bgColor,
-          backgroundColor: bgColor,
+          colorScheme: const ColorScheme.dark().copyWith(
+            primary: mainColor,
+            secondary: bgColor,
+          ),
           primaryColor: mainColor,
         ),
       ),
