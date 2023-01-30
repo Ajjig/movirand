@@ -4,7 +4,7 @@ import '../models/movie_model.dart';
 
 class FavsController extends GetxController {
   final _favs = <MovieModel>[].obs;
-  final GetStorage box = GetStorage('favorites');
+  late GetStorage box;
 
   bool              get isEmpty => _favs.isEmpty;
   List<MovieModel>  get favs => _favs;
@@ -12,24 +12,23 @@ class FavsController extends GetxController {
 
   @override
   void onInit() async {
+    box = GetStorage();
+    _favs.value = box.getValues().values.map((e) => MovieModel.fromJson(e)).toList();
     super.onInit();
-    box.getValues().forEach((key, value) {
-      _favs.add(MovieModel.fromJson(value));
-    });
   }
 
-  void add(MovieModel movie) {
+  void add(MovieModel movie) async {
     _favs.add(movie);
-    box.write(movie.id.toString(), movie.toJson());
+    await box.write(movie.id, movie.toJson());
   }
 
-  void remove(MovieModel movie) {
+  void remove(MovieModel movie) async {
     _favs.remove(movie);
-    box.remove(movie.id.toString());
+    await box.remove(movie.id);
   }
 
   bool isFavorite(MovieModel movie) {
-    return favs.contains(movie);
+    return _favs.contains(movie);
   }
 
 }

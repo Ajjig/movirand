@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:movirand/app/controllers/favorites_controller.dart';
 import 'package:movirand/app/models/actors_model.dart';
-import '../theme/colors.dart';
-import '..//widgets/loading.dart';
-import '../provider/api.dart';
-import '../models/movie_model.dart';
-import '../data/CONSTANTS.dart';
+import '../../theme/colors.dart';
+import '../../widgets/loading.dart';
+import '../../provider/api.dart';
+import '../../models/movie_model.dart';
+import '../../data/constants.dart';
 import 'package:get/get.dart';
+import './widgets/circle_avatar.dart';
+import './widgets/genres_chips.dart';
 
-class MovieDetails extends StatelessWidget {
-  final MovieModel data;
-  final FavsController controller = Get.find<FavsController>();
+class MovieDetails extends GetView<FavsController> {
+  final MovieModel data = Get.arguments;
 
-  MovieDetails({Key? key, required this.data}) : super(key: key);
+  MovieDetails({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +22,31 @@ class MovieDetails extends StatelessWidget {
       backgroundColor: bgColor,
       appBar: AppBar(
         actions: [
-          IconButton(icon: GetX<FavsController>(builder: (controller) {
-            return Icon(
-              controller.isFavorite(data)
-                  ? Icons.favorite
-                  : Icons.favorite_border,
-              size: 30,
-              color: mainColor,
-            );
-          }), onPressed: () {
-            if (controller.isFavorite(data)) {
-              controller.remove(data);
-            } else {
-              controller.add(data);
-            }
-          }),
+          IconButton(
+            icon: Obx(
+              () {
+                return Icon(
+                  controller.isFavorite(data)
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  size: 30,
+                  color: mainColor,
+                );
+              },
+            ),
+            onPressed: () {
+              if (controller.isFavorite(data)) {
+                controller.remove(data);
+              } else {
+                controller.add(data);
+              }
+            },
+          ),
           IconButton(
               icon: Icon(Icons.ios_share_rounded, size: 30, color: mainColor),
-              onPressed: () {}),
+              onPressed: () {
+                //TODO: Share
+              }),
         ],
         toolbarHeight: 50,
         elevation: 0,
@@ -55,16 +63,20 @@ class MovieDetails extends StatelessWidget {
                 children: [
                   (data.backdropPath != 'null')
                       ? Image.network(
-                          IMAGE_BASE_URL + data.backdropPath.toString(),
-                          fit: BoxFit.fill)
-                      : const LoadingIndicator(
-                          indicatorType: Indicator.lineScaleParty,
-                          colors: [
-                            Colors.white,
-                            Color(0xFFFF2745),
-                            Colors.greenAccent
-                          ],
-                          backgroundColor: Colors.transparent,
+                          kImageBaseUrl + data.backdropPath.toString(),
+                          fit: BoxFit.cover)
+                      : SizedBox(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width / 1.5,
+                          child: const LoadingIndicator(
+                            indicatorType: Indicator.lineScaleParty,
+                            colors: [
+                              Colors.white,
+                              Color(0xFFFF2745),
+                              Colors.greenAccent
+                            ],
+                            backgroundColor: Colors.transparent,
+                          ),
                         ),
                   Positioned(
                     top: 125,
@@ -75,30 +87,29 @@ class MovieDetails extends StatelessWidget {
                       children: [
                         Hero(
                           tag: data.id,
-                          child: Center(
-                            child: (data.posterPath != 'null')
-                                ? Image.network(
-                                    IMAGE_BASE_URL + data.posterPath,
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                  )
-                                : const ImageLoading(),
-                          ),
+                          child: data.posterPath != 'null'
+                              ? Image.network(
+                                  kImageBaseUrl + data.posterPath,
+                                  width: MediaQuery.of(context).size.width / 3,
+                                )
+                              : Image.asset(
+                                  'assets/images/default_poster.jpeg', // TODO: Add default poster
+                                  width: MediaQuery.of(context).size.width / 3),
                         ),
                         const SizedBox(width: 10),
-                        Flexible(
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Container(
-                              padding: const EdgeInsets.all(5),
-                              color: const Color(0XAA000000),
-                              child: Text(data.overview,
-                                  style: const TextStyle(
-                                    fontSize: 12.5,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white,
-                                  )),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              backgroundBlendMode: BlendMode.darken,
+                              borderRadius: BorderRadius.circular(2),
+                              color: Colors.black54,
                             ),
+                            child: Text(data.overview,
+                                style: const TextStyle(
+                                  fontSize: 12.5,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                )),
                           ),
                         ),
                       ],
@@ -114,21 +125,7 @@ class MovieDetails extends StatelessWidget {
               indent: 25,
               endIndent: 25,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(
-                data.genres.length,
-                (index) => InkWell(
-                  onTap: () {
-                    // TODO: Navigate to genre details
-                  },
-                  child: Chip(
-                    label: Text(data.genres[index]),
-                    backgroundColor: Colors.teal[500],
-                  ),
-                ),
-              ),
-            ),
+            GenresChips(data: data),
             Divider(
               height: 20,
               color: mainColor,
@@ -148,8 +145,7 @@ class MovieDetails extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                  enableFeedback: false,
+                              child: GestureDetector(
                                   onTap: () {
                                     Get.snackbar(
                                       snapshot.data![index].name,
@@ -178,15 +174,6 @@ class MovieDetails extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  CircleAvatar actorCircleAvatar(String profilePath, {double radius = 20}) {
-    return CircleAvatar(
-      radius: radius,
-      backgroundImage: NetworkImage(
-        profilePath,
       ),
     );
   }

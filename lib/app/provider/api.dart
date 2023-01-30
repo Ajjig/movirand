@@ -1,16 +1,15 @@
 import 'package:movirand/app/models/actors_model.dart';
-
 import '../../private.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:math';
 import '../models/movie_model.dart';
+import '../data/constants.dart';
 
 class Api {
   Future<List<MovieModel>> discover() async {
     List<MovieModel> movies = [];
 
-    print('Discover called');
     http.Response response = await http.get(Uri.https(
         'api.themoviedb.org', '/3/discover/movie', {
       'api_key': apiKey,
@@ -28,7 +27,6 @@ class Api {
 
   Future<List<ActorsModel>> getActors(MovieModel data) async {
     List<ActorsModel> actors = [];
-    print('getActors called');
     http.Response response = await http.get(Uri.https('api.themoviedb.org',
         "/3/movie/" + data.id + '/credits', {'api_key': apiKey}));
 
@@ -38,6 +36,42 @@ class Api {
       actors.add(actor);
     }
     return actors;
+  }
+
+  Future<List<MovieModel>> search(String query) async {
+    List<MovieModel> foundMovies = [];
+
+    http.Response response = await http.get(Uri.https('api.themoviedb.org',
+        '/3/search/movie', {'api_key': apiKey, 'query': query}));
+
+    if (response.statusCode < 400) {
+      dynamic jsonData = jsonDecode(response.body)['results'];
+      for (var i = 0; i < jsonData.length; i++) {
+        MovieModel movie = MovieModel.fromJson(jsonData[i]);
+        foundMovies.add(movie);
+      }
+    }
+    return foundMovies;
+  }
+
+  Future<List<MovieModel>> getGenre(String genre) async {
+    List<MovieModel> foundMovies = [];
+
+    http.Response response =
+        await http.get(Uri.https('api.themoviedb.org', '/3/discover/movie', {
+      'api_key': apiKey,
+      'with_genres': kMovieGenres.entries
+          .firstWhere((element) => element.value == genre)
+          .key
+          .toString()
+    }));
+
+    dynamic jsonData = jsonDecode(response.body)['results'];
+    for (var i = 0; i < jsonData.length; i++) {
+      MovieModel movie = MovieModel.fromJson(jsonData[i]);
+      foundMovies.add(movie);
+    }
+    return foundMovies;
   }
 }
 

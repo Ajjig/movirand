@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movirand/app/views/movie_details_page.dart';
-import '../controllers/favorites_controller.dart';
 import '../models/movie_model.dart';
 import '../theme/colors.dart';
 import 'loading.dart';
@@ -18,11 +16,9 @@ class MovieCard extends StatelessWidget {
     final double posterWidth = (MediaQuery.of(context).size.width - 25) / 2;
     return InkWell(
       onTap: () => {
-        Get.to(
-          () => MovieDetails(data: data),
-          transition: Transition.downToUp,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCirc,
+        Get.toNamed(
+          '/details',
+          arguments: data,
         ),
       },
       child: Stack(
@@ -34,6 +30,7 @@ class MovieCard extends StatelessWidget {
                 ? Image.network(
                     'https://image.tmdb.org/t/p/w500' + data.posterPath,
                     width: posterWidth,
+                    fit: BoxFit.cover,
                     loadingBuilder: (BuildContext context, Widget child,
                         ImageChunkEvent? loadingProgress) {
                       if (loadingProgress == null) return child;

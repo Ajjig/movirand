@@ -1,35 +1,45 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+// import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import '../theme/colors.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({
     Key? key,
     required int index,
     required PageController pageController,
-  }) : _index = index, _pageController = pageController, super(key: key);
+  })  : _index = index,
+        _pageController = pageController,
+        super(key: key);
 
   final int _index;
   final PageController _pageController;
 
   @override
   Widget build(BuildContext context) {
-    return CurvedNavigationBar(
-      index: _index,
-      animationCurve: Curves.easeOutCirc,
-      items: [
-        Icon(Icons.home, color: bgColor, size: 25),
-        Icon(Icons.favorite, color: bgColor, size: 25),
-        Icon(Icons.search, color: bgColor, size: 25),
-        Icon(Icons.more_horiz_outlined, color: bgColor, size: 25),
-      ],
-      backgroundColor: Colors.transparent,
-      color: mainColor,
-      animationDuration: const Duration(milliseconds: 300),
-      onTap: (index) => {
-        _pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeOutCirc),
+    return DotNavigationBar(
+      borderRadius: 20,
+      currentIndex: _index,
+      boxShadow: const [BoxShadow(blurRadius: 20, color: Colors.black)],
+      onTap: (index) {
+        _pageController.animateToPage(index,
+            duration: const Duration(milliseconds: 500), curve: Curves.ease);
       },
+      selectedItemColor: mainColor,
+      unselectedItemColor: bgColor,
+      items: [
+        DotNavigationBarItem(
+          icon: const Icon(Icons.home),
+        ),
+        DotNavigationBarItem(
+          icon: const Icon(Icons.favorite),
+        ),
+        DotNavigationBarItem(
+          icon: const Icon(Icons.search),
+        ),
+        DotNavigationBarItem(icon: const Icon(Icons.filter_list_outlined))
+      ],
+      backgroundColor: Colors.teal,
     );
   }
 }
-
