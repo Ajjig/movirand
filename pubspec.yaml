@@ -16,6 +16,7 @@ dependencies:
   get: ^4.6.5 # https://pub.dev/packages/get
   get_storage: ^2.0.3 # https://pub.dev/packages/get_storage
   dot_navigation_bar: ^1.0.1+4 # https://pub.dev/packages/dot_navigation_bar
+  glassmorphism: ^3.0.0
 
 dev_dependencies:
   flutter_test:
