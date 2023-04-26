@@ -27,7 +27,7 @@ samples, guidance on mobile development, and a full API reference.
 
 - app/
     - controllers/
-        - State management & controllers
+        - State management controllers (used GetX)
     - data/
         - Data and constants
     - provider/
