@@ -4,7 +4,7 @@ A cross-platfrom mobile app that generates random movies to watch
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
@@ -27,7 +27,7 @@ samples, guidance on mobile development, and a full API reference.
 
 - app/
     - controllers/
-        - State management & controllers
+        - State management controllers (used GetX)
     - data/
         - Data and constants
     - provider/
